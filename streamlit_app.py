@@ -11,7 +11,7 @@ try:
     conn = st.connection("gsheets", type=GSheetsConnection)
     
     # Wir lesen das Blatt "Speisekarte" ein
-    df = conn.read(spreadsheet=SHEET_URL, worksheet="Speisekarte")
+    df = conn.read(spreadsheet=SHEET_URL, worksheet="Speisekarte", ttl=0)
 
     st.success("✅ Wahnsinn, es läuft!")
     st.write("Hier sind die Daten aus deinem Google Sheet:")
