@@ -5,7 +5,7 @@ st.set_page_config(page_title="Nuss-Checker", layout="centered")
 st.title("🥜 Nuss-Checker: Speisekarten-Check")
 
 # Wir definieren die URL zur Sicherheit hier nochmal direkt als Variable
-SHEET_URL = "https://docs.google.com/spreadsheets/d/1KIVaK_b32tDo2uVqZKKxywdGVzGnYPshzXd4OQRta00/edit#gid=492057983"
+SHEET_URL = "https://docs.google.com/spreadsheets/d/1KIVaK_b32tDo2uVqZKKxywdGVzGnYPshzXd4OQRta00/edit"
 
 try:
     # Verbindung herstellen
