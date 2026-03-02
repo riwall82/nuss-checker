@@ -5,7 +5,7 @@ st.set_page_config(page_title="Nuss-Checker", layout="centered")
 st.title("🥜 Nuss-Checker: Speisekarten-Check")
 
 # Dies ist die EXAKTE URL aus deinem Screenshot
-SHEET_URL = "https://docs.google.com/spreadsheets/d/1KlVaK_b32tDo2uVqZKKxywdGVzGnYPHSzxD4OQRta00/edit"
+SHEET_URL = "https://docs.google.com/spreadsheets/d/1KIVaK_b32tDo2uVqZKKxywdGVzGnYpHSzxD4OQRta00/edit?usp=sharing"
 
 try:
     conn = st.connection("gsheets", type=GSheetsConnection)
