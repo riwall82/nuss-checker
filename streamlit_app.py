@@ -75,6 +75,6 @@ for _, row in df.iterrows():
             st.write(f"💶 {row['Preis']} €")
             st.caption(ampel_text)
 
-except Exception as e:
-    st.error("Verbindung hakt noch.")
-    st.code(f"Fehler-Details: {e}")
+#except Exception as e:
+ #   st.error("Verbindung hakt noch.")
+ #   st.code(f"Fehler-Details: {e}")
