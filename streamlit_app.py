@@ -52,7 +52,12 @@ try:
     st.write("Hier sind die Daten aus deinem Google Sheet:")
     st.write("## 🍽️ Speisekarte")
 
+except Exception as e:
+    st.error(f"Fehler beim Laden der Daten: {e}")
+    st.stop()
+
 for _, row in df.iterrows():
+    ampel_icon, ampel_text = check_ampel(row, user_allergene)
 
     ampel_icon, ampel_text = check_ampel(row, user_allergene)
 
