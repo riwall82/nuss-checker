@@ -56,7 +56,6 @@ for key, val in defaults.items():
 
 def navigate(page):
     st.session_state.page = page
-    st.rerun()
 
 # ─────────────────────────────────────────────
 # AUTHENTIFIZIERUNG & PROFIL
