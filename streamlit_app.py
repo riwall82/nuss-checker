@@ -8,268 +8,248 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────────
-# ICONS (base64 encoded SVGs - nur für Display)
+# SVG ICONS (base64)
 # ─────────────────────────────────────────────
-ICON_PROFIL_AKTIV = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iRWJlbmVfMSIgZGF0YS1uYW1lPSJFYmVuZSAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzEgODQiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgeyBmaWxsOiAjYjFiMmIyOyB9CiAgICAgIC5jbHMtMiB7IGZvbnQtZmFtaWx5OiAnQWxiZXJ0IFNhbnMnOyBmb250LXNpemU6IDEycHg7IGZpbGw6ICNiNzg3MTU7IH0KICAgICAgLmNscy0zIHsgZmlsbDogI2I3ODcxNTsgfQogICAgICAuY2xzLTQgeyBmaWxsOiBub25lOyBzdHJva2U6ICNiNzg3MTU7IHN0cm9rZS1saW5lY2FwOiByb3VuZDsgc3Ryb2tlLWxpbmVqb2luOiByb3VuZDsgc3Ryb2tlLXdpZHRoOiAxLjdweDsgfQogICAgICAuY2xzLTUgeyBmaWxsOiBub25lOyBzdHJva2U6ICNiMWIyYjI7IHN0cm9rZS1saW5lY2FwOiByb3VuZDsgc3Ryb2tlLWxpbmVqb2luOiByb3VuZDsgc3Ryb2tlLXdpZHRoOiAxLjdweDsgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPHRleHQgY2xhc3M9ImNscy0yIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0OS4xMyA2MCkiPlByb2ZpbDwvdGV4dD4KICA8cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik02NC43NSwzOS4zMmMzLjg3LDAsNy4zNC0xLjY2LDkuNzctNC4yOS0xLjM5LTQuMDctNS4yMy03LTkuNzctN3MtOC4zOSwyLjkzLTkuNzcsN2MyLjQzLDIuNjMsNS45LDQuMjksOS43Nyw0LjI5WiIvPgogIDxjaXJjbGUgY2xhc3M9ImNscy0zIiBjeD0iNjQuNzUiIGN5PSIyMS41NCIgcj0iNC44NCIvPgogIDxjaXJjbGUgY2xhc3M9ImNscy00IiBjeD0iNjQuNzUiIGN5PSIyNS45OSIgcj0iMTMuMSIvPgogIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTY0Ljc1LDguNGM3LjI5LDAsMTMuNTQsNC40MywxNi4yMSwxMC43NCIvPgogIDxjaXJjbGUgY2xhc3M9ImNscy0xIiBjeD0iODEuNDUiIGN5PSIyMi42MiIgcj0iMS4wOSIvPgo8L3N2Zz4="
+ICON_PROFIL_AKTIV  = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iRWJlbmVfMSIgZGF0YS1uYW1lPSJFYmVuZSAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzEgODQiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgeyBmaWxsOiAjYjFiMmIyOyB9CiAgICAgIC5jbHMtMiB7IGZvbnQtZmFtaWx5OiAnQWxiZXJ0IFNhbnMnOyBmb250LXNpemU6IDEycHg7IGZpbGw6ICNiNzg3MTU7IH0KICAgICAgLmNscy0zIHsgZmlsbDogI2I3ODcxNTsgfQogICAgICAuY2xzLTQgeyBmaWxsOiBub25lOyBzdHJva2U6ICNiNzg3MTU7IHN0cm9rZS1saW5lY2FwOiByb3VuZDsgc3Ryb2tlLWxpbmVqb2luOiByb3VuZDsgc3Ryb2tlLXdpZHRoOiAxLjdweDsgfQogICAgICAuY2xzLTUgeyBmaWxsOiBub25lOyBzdHJva2U6ICNiMWIyYjI7IHN0cm9rZS1saW5lY2FwOiByb3VuZDsgc3Ryb2tlLWxpbmVqb2luOiByb3VuZDsgc3Ryb2tlLXdpZHRoOiAxLjdweDsgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPHRleHQgY2xhc3M9ImNscy0yIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0OS4xMyA2MCkiPlByb2ZpbDwvdGV4dD4KICA8cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik02NC43NSwzOS4zMmMzLjg3LDAsNy4zNC0xLjY2LDkuNzctNC4yOS0xLjM5LTQuMDctNS4yMy03LTkuNzctN3MtOC4zOSwyLjkzLTkuNzcsN2MyLjQzLDIuNjMsNS45LDQuMjksOS43Nyw0LjI5WiIvPgogIDxjaXJjbGUgY2xhc3M9ImNscy0zIiBjeD0iNjQuNzUiIGN5PSIyMS41NCIgcj0iNC44NCIvPgogIDxjaXJjbGUgY2xhc3M9ImNscy00IiBjeD0iNjQuNzUiIGN5PSIyNS45OSIgcj0iMTMuMSIvPgogIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTY0Ljc1LDguNGM3LjI5LDAsMTMuNTQsNC40MywxNi4yMSwxMC43NCIvPgogIDxjaXJjbGUgY2xhc3M9ImNscy0xIiBjeD0iODEuNDUiIGN5PSIyMi42MiIgcj0iMS4wOSIvPgo8L3N2Zz4="
 ICON_PROFIL_PASSIV = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iRWJlbmVfMSIgZGF0YS1uYW1lPSJFYmVuZSAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzEgODQiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgeyBmaWxsOiAjM2M1NzdhOyB9CiAgICAgIC5jbHMtMiB7IGZvbnQtZmFtaWx5OiAnQWxiZXJ0IFNhbnMnOyBmb250LXNpemU6IDEycHg7IGZpbGw6ICM2ZjcwNmY7IH0KICAgICAgLmNscy0zIHsgZmlsbDogI2IxYjJiMjsgfQogICAgICAuY2xzLTQgeyBmaWxsOiBub25lOyBzdHJva2U6ICMzYzU3N2E7IHN0cm9rZS1saW5lY2FwOiByb3VuZDsgc3Ryb2tlLWxpbmVqb2luOiByb3VuZDsgc3Ryb2tlLXdpZHRoOiAxLjdweDsgfQogICAgICAuY2xzLTUgeyBmaWxsOiBub25lOyBzdHJva2U6ICNiMWIyYjI7IHN0cm9rZS1saW5lY2FwOiByb3VuZDsgc3Ryb2tlLWxpbmVqb2luOiByb3VuZDsgc3Ryb2tlLXdpZHRoOiAxLjdweDsgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPHRleHQgY2xhc3M9ImNscy0yIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0OS4xMyA2MCkiPlByb2ZpbDwvdGV4dD4KICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik02NC43NSwzOS4zMmMzLjg3LDAsNy4zNC0xLjY2LDkuNzctNC4yOS0xLjM5LTQuMDctNS4yMy03LTkuNzctN3MtOC4zOSwyLjkzLTkuNzcsN2MyLjQzLDIuNjMsNS45LDQuMjksOS43Nyw0LjI5WiIvPgogIDxjaXJjbGUgY2xhc3M9ImNscy0xIiBjeD0iNjQuNzUiIGN5PSIyMS41NCIgcj0iNC44NCIvPgogIDxjaXJjbGUgY2xhc3M9ImNscy00IiBjeD0iNjQuNzUiIGN5PSIyNS45OSIgcj0iMTMuMSIvPgogIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTY0Ljc1LDguNGM3LjI5LDAsMTMuNTQsNC40MywxNi4yMSwxMC43NCIvPgogIDxjaXJjbGUgY2xhc3M9ImNscy0zIiBjeD0iODEuNDUiIGN5PSIyMi42MiIgcj0iMS4wOSIvPgo8L3N2Zz4="
-ICON_SCAN_AKTIV = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iRWJlbmVfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTMxIDg0Ij4KICA8ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6bm9uZTtzdHJva2U6I2I3ODcxNTtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDtzdHJva2Utd2lkdGg6MS43cHh9LmNscy0ye2ZvbnQtZmFtaWx5OidBbGJlcnQgU2Fucyc7Zm9udC1zaXplOjEycHg7ZmlsbDojYjc4NzE1fTwvc3R5bGU+PC9kZWZzPgogIDx0ZXh0IGNsYXNzPSJjbHMtMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTQuODcgNjApIj5TY2FuPC90ZXh0PgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQ2LjM3LDIwLjA5di0zLjA3YzAtMi4xNywxLjc2LTMuOTIsMy45Mi0zLjkyaDkuMDciLz4KICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00Ni4zNywzMi4zMnYzLjA3YzAsMi4xNywxLjc2LDMuOTIsMy45MiwzLjkyaDkuMDciLz4KICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik05MS4wMywyMC4wOXYtMy4wN2MwLTIuMTctMS43Ni0zLjkyLTMuOTItMy45MmgtOS4wNyIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTkxLjAzLDMyLjMydjMuMDdjMCwyLjE3LTEuNzYsMy45Mi0zLjkyLDMuOTJoLTkuMDciLz4KPC9zdmc+"
-ICON_SCAN_PASSIV = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iRWJlbmVfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTMxIDg0Ij4KICA8ZGVmcz48c3R5bGU+LmNscy0xe2ZvbnQtZmFtaWx5OidBbGJlcnQgU2Fucyc7Zm9udC1zaXplOjEycHg7ZmlsbDojNmY3MDZmfS5jbHMtMntmaWxsOm5vbmU7c3Ryb2tlOiMzYzU3N2E7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MTA7c3Ryb2tlLXdpZHRoOjEuN3B4fTwvc3R5bGU+PC9kZWZzPgogIDx0ZXh0IGNsYXNzPSJjbHMtMSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTQuODcgNjApIj5TY2FuPC90ZXh0PgogIDxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTQ2LjM3LDIwLjA5di0zLjA3YzAtMi4xNywxLjc2LTMuOTIsMy45Mi0zLjkyaDkuMDciLz4KICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik00Ni4zNywzMi4zMnYzLjA3YzAsMi4xNywxLjc2LDMuOTIsMy45MiwzLjkyaDkuMDciLz4KICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik05MS4wMywyMC4wOXYtMy4wN2MwLTIuMTctMS43Ni0zLjkyLTMuOTItMy45MmgtOS4wNyIvPgogIDxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTkxLjAzLDMyLjMydjMuMDdjMCwyLjE3LTEuNzYsMy45Mi0zLjkyLDMuOTJoLTkuMDciLz4KPC9zdmc+"
-ICON_REST_AKTIV = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iRWJlbmVfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTMxIDg0Ij4KICA8ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjtzdHJva2U6I2I3ODcxNTtzdHJva2Utd2lkdGg6MS4yMXB4O3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZH0uY2xzLTJ7ZmlsbDpub25lO3N0cm9rZTojYjc4NzE1O3N0cm9rZS13aWR0aDoxLjdweDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmR9LmNscy0ze2ZpbGw6I2U0ZTRlNH0uY2xzLTR7ZmlsbDojYjFiMmIyfS5jbHMtNXtmb250LWZhbWlseTonQWxiZXJ0IFNhbnMnO2ZvbnQtc2l6ZToxMnB4O2ZpbGw6I2I3ODcxNX0uY2xzLTZ7ZmlsbDpub25lO3N0cm9rZTojYjFiMmIyO3N0cm9rZS13aWR0aDoxLjdweDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmR9PC9zdHlsZT48L2RlZnM+CiAgPHBhdGggY2xhc3M9ImNscy0zIiBkPSJNNzUuOTgsMzIuNzhWMTQuOThjMC0xLjE0LS45My0yLjA3LTIuMDctMi4wN2gtMTUuNjNjLTEuMTQsMC0yLjA3LjkzLTIuMDcsMi4wN3YzLjU5YzkuMDkuMjUsMTYuNzksNi4wOSwxOS43NywxNC4yMVoiLz4KICA8cmVjdCBjbGFzcz0iY2xzLTIiIHg9IjU2LjIiIHk9IjEyLjkxIiB3aWR0aD0iMTkuNzciIGhlaWdodD0iMjYuMTkiIHJ4PSIzLjU0IiByeT0iMy41NCIvPgogIDx0ZXh0IGNsYXNzPSJjbHMtNSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzMuMDEgNjApIj5SZXN0YXVyYW50czwvdGV4dD4KICA8cGF0aCBjbGFzcz0iY2xzLTYiIGQ9Ik02OS44Myw4LjQ2aDUuMjRjMi45MSwwLDUuMjcsMi4zNiw1LjI3LDUuMjd2NS41MiIvPgogIDxjaXJjbGUgY2xhc3M9ImNscy00IiBjeD0iODAuMzQiIGN5PSIyMi42MiIgcj0iMS4wOSIvPgo8L3N2Zz4="
-ICON_REST_PASSIV = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iRWJlbmVfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTMxIDg0Ij4KICA8ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2U0ZTRlNH0uY2xzLTJ7Zm9udC1mYW1pbHk6J0FsYmVydCBTYW5zJztmb250LXNpemU6MTJweDtmaWxsOiM2ZjcwNmZ9LmNscy0ze2ZpbGw6I2IxYjJiMn0uY2xzLTR7ZmlsbDpub25lO3N0cm9rZTojM2M1NzdhO3N0cm9rZS13aWR0aDoxLjdweDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmR9LmNscy01e2ZpbGw6bm9uZTtzdHJva2U6I2IxYjJiMjtzdHJva2Utd2lkdGg6MS43cHg7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kfTwvc3R5bGU+PC9kZWZzPgogIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTc1Ljk4LDMyLjc4VjE0Ljk4YzAtMS4xNC0uOTMtMi4wNy0yLjA3LTIuMDdoLTE1LjYzYy0xLjE0LDAtMi4wNy45My0yLjA3LDIuMDd2My41OWM5LjA5LjI1LDE2Ljc5LDYuMDksMTkuNzcsMTQuMjFaIi8+CiAgPHJlY3QgY2xhc3M9ImNscy00IiB4PSI1Ni4yIiB5PSIxMi45MSIgd2lkdGg9IjE5Ljc3IiBoZWlnaHQ9IjI2LjE5IiByeD0iMy41NCIgcnk9IjMuNTQiLz4KICA8dGV4dCBjbGFzcz0iY2xzLTIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMzLjAxIDYwKSI+UmVzdGF1cmFudHM8L3RleHQ+CiAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNNjkuODMsOC40Nmg1LjI0YzIuOTEsMCw1LjI3LDIuMzYsNS4yNyw1LjI3djUuNTIiLz4KICA8Y2lyY2xlIGNsYXNzPSJjbHMtMyIgY3g9IjgwLjM0IiBjeT0iMjIuNjIiIHI9IjEuMDkiLz4KPC9zdmc+"
-ICON_FAV_AKTIV = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNy44NSAxNi40NiI+PHBhdGggZD0iTTguOTIsMTUuOTZDNS40NCwxMy4xNy41LDguMy41LDQuNDQuNSwyLjIxLDIuNC41LDQuNzUuNWMyLjAzLDAsMy40NiwxLjA1LDQuMTcsMy42My43Mi0yLjU4LDIuMTItMy42Myw0LjE3LTMuNjMsMi4zNSwwLDQuMjUsMS43MSw0LjI1LDMuOTQsMCwzLjg2LTQuOTQsOC43My04LjQyLDExLjUyWiIgc3R5bGU9ImZpbGw6I2I3ODcxNTtzdHJva2U6I2I3ODcxNTtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmQiLz48L3N2Zz4="
-ICON_FAV_PASSIV = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNy44NSAxNi40NiI+PHBhdGggZD0iTTguOTIsMTUuOTZDNS40NCwxMy4xNy41LDguMy41LDQuNDQuNSwyLjIxLDIuNC41LDQuNzUuNWMyLjAzLDAsMy40NiwxLjA1LDQuMTcsMy42My43Mi0yLjU4LDIuMTItMy42Myw0LjE3LTMuNjMsMi4zNSwwLDQuMjUsMS43MSw0LjI1LDMuOTQsMCwzLjg2LTQuOTQsOC43My04LjQyLDExLjUyWiIgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzliOTI4YjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmQiLz48L3N2Zz4="
-ICON_HAKEN = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMC42MSAxNi4zOSI+PHBhdGggZD0iTTcuMTYsMTUuODloMGMtLjY1LDAtMS4yNy0uMjYtMS43My0uNzJMMS4yMiwxMC45NWMtLjk2LS45NS0uOTYtMi41LDAtMy40Ni45Ni0uOTUsMi41LS45NSwzLjQ2LDBsMi40OSwyLjQ5TDE1LjkzLDEuMjJjLjk2LS45NiwyLjUtLjk2LDMuNDYsMCwuOTYuOTUuOTYsMi41LDAsMy40NmwtMTAuNSwxMC41Yy0uNDYuNDYtMS4wOC43Mi0xLjczLjcyWiIgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzliOTI4YjtzdHJva2UtbWl0ZXJsaW1pdDoxMCIvPjwvc3ZnPg=="
+ICON_SCAN_AKTIV    = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzEgODQiPjxkZWZzPjxzdHlsZT4uYXtmaWxsOm5vbmU7c3Ryb2tlOiNiNzg3MTU7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MTA7c3Ryb2tlLXdpZHRoOjEuN3B4fS5ie2ZvbnQtZmFtaWx5OidBbGJlcnQgU2Fucyc7Zm9udC1zaXplOjEycHg7ZmlsbDojYjc4NzE1fTwvc3R5bGU+PC9kZWZzPjx0ZXh0IGNsYXNzPSJiIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1NC44NyA2MCkiPlNjYW48L3RleHQ+PHBhdGggY2xhc3M9ImEiIGQ9Ik00Ni4zNywyMC4wOXYtMy4wN2MwLTIuMTcsMS43Ni0zLjkyLDMuOTItMy45Mmg5LjA3Ii8+PHBhdGggY2xhc3M9ImEiIGQ9Ik00Ni4zNywzMi4zMnYzLjA3YzAsMi4xNywxLjc2LDMuOTIsMy45MiwzLjkyaDkuMDciLz48cGF0aCBjbGFzcz0iYSIgZD0iTTkxLjAzLDIwLjA5di0zLjA3YzAtMi4xNy0xLjc2LTMuOTItMy45Mi0zLjkyaC05LjA3Ii8+PHBhdGggY2xhc3M9ImEiIGQ9Ik05MS4wMywzMi4zMnYzLjA3YzAsMi4xNy0xLjc2LDMuOTItMy45MiwzLjkyaC05LjA3Ii8+PC9zdmc+"
+ICON_SCAN_PASSIV   = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzEgODQiPjxkZWZzPjxzdHlsZT4uYXtmb250LWZhbWlseTonQWxiZXJ0IFNhbnMnO2ZvbnQtc2l6ZToxMnB4O2ZpbGw6IzZmNzA2Zn0uYntmaWxsOm5vbmU7c3Ryb2tlOiMzYzU3N2E7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MTA7c3Ryb2tlLXdpZHRoOjEuN3B4fTwvc3R5bGU+PC9kZWZzPjx0ZXh0IGNsYXNzPSJhIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1NC44NyA2MCkiPlNjYW48L3RleHQ+PHBhdGggY2xhc3M9ImIiIGQ9Ik00Ni4zNywyMC4wOXYtMy4wN2MwLTIuMTcsMS43Ni0zLjkyLDMuOTItMy45Mmg5LjA3Ii8+PHBhdGggY2xhc3M9ImIiIGQ9Ik00Ni4zNywzMi4zMnYzLjA3YzAsMi4xNywxLjc2LDMuOTIsMy45MiwzLjkyaDkuMDciLz48cGF0aCBjbGFzcz0iYiIgZD0iTTkxLjAzLDIwLjA5di0zLjA3YzAtMi4xNy0xLjc2LTMuOTItMy45Mi0zLjkyaC05LjA3Ii8+PHBhdGggY2xhc3M9ImIiIGQ9Ik05MS4wMywzMi4zMnYzLjA3YzAsMi4xNy0xLjc2LDMuOTItMy45MiwzLjkyaC05LjA3Ii8+PC9zdmc+"
+ICON_REST_AKTIV    = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzEgODQiPjxkZWZzPjxzdHlsZT4uYXtmaWxsOiNlNGU0ZTR9LmJ7ZmlsbDpub25lO3N0cm9rZTojYjc4NzE1O3N0cm9rZS13aWR0aDoxLjdweDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmR9LmN7Zm9udC1mYW1pbHk6J0FsYmVydCBTYW5zJztmb250LXNpemU6MTJweDtmaWxsOiNiNzg3MTV9LmR7ZmlsbDpub25lO3N0cm9rZTojYjFiMmIyO3N0cm9rZS13aWR0aDoxLjdweDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmR9LmV7ZmlsbDojYjFiMmIyfTwvc3R5bGU+PC9kZWZzPjxwYXRoIGNsYXNzPSJhIiBkPSJNNzUuOTgsMzIuNzhWMTQuOThjMC0xLjE0LS45My0yLjA3LTIuMDctMi4wN2gtMTUuNjNjLTEuMTQsMC0yLjA3LjkzLTIuMDcsMi4wN3YzLjU5YzkuMDkuMjUsMTYuNzksNi4wOSwxOS43NywxNC4yMVoiLz48cmVjdCBjbGFzcz0iYiIgeD0iNTYuMiIgeT0iMTIuOTEiIHdpZHRoPSIxOS43NyIgaGVpZ2h0PSIyNi4xOSIgcng9IjMuNTQiIHJ5PSIzLjU0Ii8+PHRleHQgY2xhc3M9ImMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMzLjAxIDYwKSI+UmVzdGF1cmFudHM8L3RleHQ+PHBhdGggY2xhc3M9ImQiIGQ9Ik02OS44Myw4LjQ2aDUuMjRjMi45MSwwLDUuMjcsMi4zNiw1LjI3LDUuMjd2NS41MiIvPjxjaXJjbGUgY2xhc3M9ImUiIGN4PSI4MC4zNCIgY3k9IjIyLjYyIiByPSIxLjA5Ii8+PC9zdmc+"
+ICON_REST_PASSIV   = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMzEgODQiPjxkZWZzPjxzdHlsZT4uYXtmaWxsOiNlNGU0ZTR9LmJ7ZmlsbDpub25lO3N0cm9rZTojM2M1NzdhO3N0cm9rZS13aWR0aDoxLjdweDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmR9LmN7Zm9udC1mYW1pbHk6J0FsYmVydCBTYW5zJztmb250LXNpemU6MTJweDtmaWxsOiM2ZjcwNmZ9LmR7ZmlsbDpub25lO3N0cm9rZTojYjFiMmIyO3N0cm9rZS13aWR0aDoxLjdweDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmR9LmV7ZmlsbDojYjFiMmIyfTwvc3R5bGU+PC9kZWZzPjxwYXRoIGNsYXNzPSJhIiBkPSJNNzUuOTgsMzIuNzhWMTQuOThjMC0xLjE0LS45My0yLjA3LTIuMDctMi4wN2gtMTUuNjNjLTEuMTQsMC0yLjA3LjkzLTIuMDcsMi4wN3YzLjU5YzkuMDkuMjUsMTYuNzksNi4wOSwxOS43NywxNC4yMVoiLz48cmVjdCBjbGFzcz0iYiIgeD0iNTYuMiIgeT0iMTIuOTEiIHdpZHRoPSIxOS43NyIgaGVpZ2h0PSIyNi4xOSIgcng9IjMuNTQiIHJ5PSIzLjU0Ii8+PHRleHQgY2xhc3M9ImMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMzLjAxIDYwKSI+UmVzdGF1cmFudHM8L3RleHQ+PHBhdGggY2xhc3M9ImQiIGQ9Ik02OS44Myw4LjQ2aDUuMjRjMi45MSwwLDUuMjcsMi4zNiw1LjI3LDUuMjd2NS41MiIvPjxjaXJjbGUgY2xhc3M9ImUiIGN4PSI4MC4zNCIgY3k9IjIyLjYyIiByPSIxLjA5Ii8+PC9zdmc+"
+ICON_HAKEN         = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMC42MSAxNi4zOSI+PHBhdGggZD0iTTcuMTYsMTUuODloMGMtLjY1LDAtMS4yNy0uMjYtMS43My0uNzJMMS4yMiwxMC45NWMtLjk2LS45NS0uOTYtMi41LDAtMy40Ni45Ni0uOTUsMi41LS45NSwzLjQ2LDBsMi40OSwyLjQ5TDE1LjkzLDEuMjJjLjk2LS45NiwyLjUtLjk2LDMuNDYsMCwuOTYuOTUuOTYsMi41LDAsMy40NmwtMTAuNSwxMC41Yy0uNDYuNDYtMS4wOC43Mi0xLjczLjcyWiIgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzliOTI4YjtzdHJva2UtbWl0ZXJsaW1pdDoxMCIvPjwvc3ZnPg=="
+ICON_FAV_PASSIV    = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNy44NSAxNi40NiI+PHBhdGggZD0iTTguOTIsMTUuOTZDNS40NCwxMy4xNy41LDguMy41LDQuNDQuNSwyLjIxLDIuNC41LDQuNzUuNWMyLjAzLDAsMy40NiwxLjA1LDQuMTcsMy42My43Mi0yLjU4LDIuMTItMy42Myw0LjE3LTMuNjMsMi4zNSwwLDQuMjUsMS43MSw0LjI1LDMuOTQsMCwzLjg2LTQuOTQsOC43My04LjQyLDExLjUyWiIgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6IzliOTI4YjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmQiLz48L3N2Zz4="
 
 def svg_img(b64, width="100%"):
     return f'<img src="data:image/svg+xml;base64,{b64}" width="{width}" style="display:block"/>'
 
 # ─────────────────────────────────────────────
-# GLOBALES CSS
+# CSS: alle Fixes
 # ─────────────────────────────────────────────
-st.markdown("""
+st.markdown(f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600;700&display=swap');
 
-html, body, [class*="css"] {
+/* ── Hide Streamlit chrome ── */
+#MainMenu, header[data-testid="stHeader"], [data-testid="stToolbar"],
+footer, .viewerBadge_container__1QSob, [data-testid="stDecoration"],
+.stDeployButton, [data-testid="manage-app-button"] {{
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+}}
+
+/* ── Basis ── */
+html, body, [class*="css"] {{
     font-family: 'Albert Sans', sans-serif !important;
-    background-color: #ffffff;
-}
-.stApp { background-color: #ffffff; }
-.block-container { padding: 16px 16px 110px 16px !important; max-width: 430px !important; }
+    background: #fff;
+    -webkit-text-size-adjust: 100%;
+}}
+.stApp {{ background: #fff; }}
+.block-container {{
+    padding: 16px 16px 100px 16px !important;
+    max-width: 430px !important;
+    margin: 0 auto !important;
+}}
 
 /* ── Typografie ── */
-h1 {
+h1 {{
     font-family: 'Albert Sans', sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 26px !important;
-    color: #b78715 !important;
-    margin-bottom: 4px !important;
-}
-h2 {
+    font-size: 26px !important; font-weight: 700 !important;
+    color: #b78715 !important; margin-bottom: 4px !important;
+}}
+h2 {{
     font-family: 'Albert Sans', sans-serif !important;
-    font-weight: 600 !important;
-    font-size: 18px !important;
-    color: #9b928b !important;
-    margin: 12px 0 4px 0 !important;
-}
-h3 {
+    font-size: 16px !important; font-weight: 600 !important;
+    color: #9b928b !important; margin: 14px 0 4px !important;
+}}
+p, .stMarkdown p {{
     font-family: 'Albert Sans', sans-serif !important;
-    font-weight: 500 !important;
-    font-size: 15px !important;
-    color: #9b928b !important;
-    margin: 8px 0 2px 0 !important;
-}
-p, .stMarkdown p {
-    font-family: 'Albert Sans', sans-serif !important;
-    color: #000000 !important;
-    font-size: 15px !important;
-}
-label, .stCheckbox label span { 
-    font-family: 'Albert Sans', sans-serif !important; 
-    color: #000000 !important;
-    font-size: 15px !important;
-}
+    color: #000 !important; font-size: 15px !important;
+}}
+label {{ font-family: 'Albert Sans', sans-serif !important; color: #000 !important; }}
 
-/* ── Buttons ── */
-.stButton > button {
+/* ── Buttons allgemein ── */
+.stButton > button {{
     font-family: 'Albert Sans', sans-serif !important;
-    border-radius: 12px !important;
+    border-radius: 12px !important; cursor: pointer !important;
     transition: opacity 0.2s !important;
-}
-.stButton > button[kind="primary"] {
-    background-color: #b78715 !important;
-    color: #ffffff !important;
-    border: none !important;
-    font-weight: 600 !important;
-    font-size: 16px !important;
-    padding: 14px 24px !important;
-    width: 100% !important;
-}
-.stButton > button[kind="primary"]:hover { opacity: 0.88 !important; }
-.stButton > button[kind="primary"]:disabled {
-    background-color: #e0d5c0 !important;
-    color: #a0906a !important;
-}
-.stButton > button[kind="secondary"] {
-    background-color: transparent !important;
-    color: #3c577a !important;
-    border: 1.5px solid #3c577a !important;
-    font-weight: 500 !important;
-    font-size: 15px !important;
-    padding: 10px 20px !important;
-    width: 100% !important;
-}
-/* Zurück-Button */
-.stButton > button:not([kind]) {
-    background-color: transparent !important;
-    color: #3c577a !important;
-    border: none !important;
-    font-weight: 500 !important;
-    padding: 6px 0 !important;
-    box-shadow: none !important;
-}
+}}
+.stButton > button[kind="primary"] {{
+    background: #b78715 !important; color: #fff !important;
+    border: none !important; font-weight: 600 !important;
+    font-size: 16px !important; padding: 14px 24px !important; width: 100% !important;
+}}
+.stButton > button[kind="primary"]:hover {{ opacity: 0.88 !important; }}
+.stButton > button[kind="primary"]:disabled {{
+    background: #e0d5c0 !important; color: #a0906a !important;
+}}
+.stButton > button[kind="secondary"] {{
+    background: transparent !important; color: #3c577a !important;
+    border: 1.5px solid #3c577a !important; font-weight: 500 !important;
+    font-size: 15px !important; padding: 10px 20px !important; width: 100% !important;
+}}
+.stButton > button:not([kind]) {{
+    background: transparent !important; border: none !important;
+    color: #3c577a !important; font-weight: 500 !important;
+    padding: 4px 0 !important; box-shadow: none !important;
+}}
 
 /* ── Inputs ── */
-.stTextInput > div > div > input,
-.stTextArea textarea,
-.stNumberInput input {
+.stTextInput > div > div > input, .stTextArea textarea, .stNumberInput input {{
     font-family: 'Albert Sans', sans-serif !important;
-    border: 1.5px solid #e0e0e0 !important;
-    border-radius: 10px !important;
-    padding: 12px 14px !important;
-    font-size: 15px !important;
-    color: #000000 !important;
-    background: #f9f9f9 !important;
-}
-.stTextInput > div > div > input:focus,
-.stTextArea textarea:focus {
+    border: 1.5px solid #e0e0e0 !important; border-radius: 10px !important;
+    padding: 12px 14px !important; font-size: 15px !important;
+    color: #000 !important; background: #f9f9f9 !important;
+}}
+.stTextInput > div > div > input:focus, .stTextArea textarea:focus {{
     border-color: #b78715 !important;
     box-shadow: 0 0 0 2px rgba(183,135,21,0.15) !important;
-}
-.stTextInput label, .stTextArea label, .stNumberInput label {
-    color: #9b928b !important;
-    font-size: 13px !important;
-    font-weight: 500 !important;
-}
+}}
+.stTextInput label, .stTextArea label, .stNumberInput label {{
+    color: #9b928b !important; font-size: 13px !important; font-weight: 500 !important;
+}}
 
-/* ── Checkbox (nur native Streamlit-Checkbox, kein Custom-Icon daneben) ── */
-.stCheckbox { margin: 2px 0 !important; }
-.stCheckbox input[type="checkbox"] { accent-color: #b78715 !important; width: 18px !important; height: 18px !important; }
-.stCheckbox label { font-size: 14px !important; color: #000000 !important; }
+/* ── Checkbox ── */
+.stCheckbox input[type="checkbox"] {{ accent-color: #b78715 !important; width: 18px !important; height: 18px !important; }}
+.stCheckbox label span {{ color: #000 !important; font-size: 14px !important; }}
 
 /* ── Radio ── */
-.stRadio label { font-size: 15px !important; color: #000000 !important; }
-.stRadio input[type="radio"]:checked { accent-color: #b78715 !important; }
+.stRadio label {{ color: #000 !important; font-size: 15px !important; }}
+.stRadio input[type="radio"]:checked {{ accent-color: #b78715 !important; }}
 
-/* ── Tabs ── */
-.stTabs [data-baseweb="tab-list"] {
+/* ── Tabs – kein beweglicher Unterstrich ── */
+.stTabs [data-baseweb="tab-list"] {{
     background: transparent !important;
-    border-bottom: 1.5px solid #f0f0f0 !important;
-    gap: 0 !important;
-}
-.stTabs [data-baseweb="tab"] {
+    border-bottom: 1.5px solid #f0f0f0 !important; gap: 0 !important;
+}}
+.stTabs [data-baseweb="tab"] {{
     font-family: 'Albert Sans', sans-serif !important;
-    font-weight: 500 !important;
-    font-size: 15px !important;
+    font-weight: 500 !important; font-size: 15px !important;
     color: #9b928b !important;
     border-bottom: 2px solid transparent !important;
-    padding: 12px 20px !important;
-    flex: 1 !important;
+    padding: 12px 24px !important; flex: 1 !important;
     justify-content: center !important;
-}
-.stTabs [aria-selected="true"] {
+    transition: none !important;
+}}
+.stTabs [aria-selected="true"] {{
     color: #b78715 !important;
     border-bottom: 2px solid #b78715 !important;
     background: transparent !important;
-}
+}}
+.stTabs [data-baseweb="tab-highlight"] {{ display: none !important; }}
+.stTabs [data-baseweb="tab-border"] {{ display: none !important; }}
 
 /* ── Alerts ── */
-.stAlert { border-radius: 12px !important; font-family: 'Albert Sans', sans-serif !important; }
+.stAlert {{ border-radius: 12px !important; font-family: 'Albert Sans', sans-serif !important; }}
+.stCaption {{ color: #9b928b !important; font-size: 13px !important; }}
+hr {{ border: none !important; border-top: 1px solid #f0f0f0 !important; margin: 10px 0 !important; }}
 
-/* ── Caption ── */
-.stCaption { color: #9b928b !important; font-size: 13px !important; }
+/* ── Kamera Fullscreen ── */
+[data-testid="stCameraInput"] {{
+    position: fixed !important; top: 0 !important; left: 0 !important;
+    width: 100vw !important; height: 100vh !important;
+    z-index: 8000 !important; background: #000 !important;
+    display: flex !important; flex-direction: column !important;
+}}
+[data-testid="stCameraInput"] video {{
+    width: 100% !important; height: calc(100vh - 80px) !important;
+    object-fit: cover !important;
+}}
+[data-testid="stCameraInput"] button {{
+    position: absolute !important; bottom: 20px !important;
+    left: 50% !important; transform: translateX(-50%) !important;
+    background: #b78715 !important; color: #fff !important;
+    border: none !important; border-radius: 50px !important;
+    padding: 14px 40px !important; font-size: 16px !important;
+    font-weight: 600 !important; z-index: 8001 !important;
+}}
 
-/* ── Divider ── */
-hr { border: none !important; border-top: 1px solid #f0f0f0 !important; margin: 12px 0 !important; }
+/* ── Bottom Navigation ── */
+.nav-wrapper {{
+    position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 100%; max-width: 430px;
+    background: #fff; border-top: 1px solid #f0f0f0;
+    z-index: 9000; box-shadow: 0 -2px 12px rgba(0,0,0,0.07);
+    display: flex; align-items: stretch;
+}}
+/* FIX: background-size auf "auto 68px" → Icon füllt die Nav-Bar-Höhe korrekt aus */
+.nav-wrapper .stButton > button {{
+    background-color: transparent !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: auto 68px !important;
+    border: none !important; border-radius: 0 !important;
+    width: 100% !important; height: 72px !important;
+    color: transparent !important; font-size: 1px !important;
+    box-shadow: none !important; padding: 0 !important;
+}}
 
-/* ── Bottom Nav ── */
-.bottom-nav-container {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 430px;
-    background: #ffffff;
-    border-top: 1px solid #f0f0f0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    z-index: 9999;
-    box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
-    padding: 6px 0 8px;
-}
-.nav-icon-btn {
-    background: none !important;
-    border: none !important;
-    cursor: pointer !important;
-    flex: 1 !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    padding: 4px 0 !important;
-}
-
-/* ── Cards ── */
-.gericht-card {
-    background: #f9f9f9;
-    border-radius: 14px;
-    padding: 14px 16px;
-    margin-bottom: 10px;
-    border: 1px solid #f0f0f0;
-}
-.gericht-nr { font-size: 12px; color: #9b928b; margin-bottom: 2px; font-family: 'Albert Sans', sans-serif; }
-.gericht-name { font-size: 16px; font-weight: 600; color: #000000; font-family: 'Albert Sans', sans-serif; }
-.gericht-preis { font-size: 14px; color: #b78715; font-weight: 500; margin-top: 4px; font-family: 'Albert Sans', sans-serif; }
-.ampel-sicher { color: #2e7d32; font-size: 13px; font-weight: 500; font-family: 'Albert Sans', sans-serif; }
-.ampel-warnung { color: #c0392b; font-size: 13px; font-weight: 500; font-family: 'Albert Sans', sans-serif; }
-
-/* ── Disclaimer Box ── */
-.disclaimer-box {
-    background: #f9f9f9;
-    border-radius: 14px;
-    padding: 20px;
-    margin: 16px 0;
+/* Profil List Rows */
+.profil-row {{
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 4px; border-bottom: 1px solid #f0f0f0; cursor: pointer;
+}}
+.profil-row-label {{ font-size: 16px; color: #000; font-weight: 400; font-family: 'Albert Sans', sans-serif; }}
+.profil-row-right {{ display: flex; align-items: center; gap: 8px; }}
+.profil-row-value {{ font-size: 14px; color: #9b928b; font-family: 'Albert Sans', sans-serif; }}
+.profil-row-arrow {{ font-size: 16px; color: #9b928b; }}
+.profil-section-title {{
+    font-size: 13px; font-weight: 600; color: #9b928b;
+    text-transform: uppercase; letter-spacing: 0.5px;
     font-family: 'Albert Sans', sans-serif;
-    font-size: 14px;
-    line-height: 1.7;
-    color: #000000;
-}
+    margin: 20px 0 0; padding-bottom: 2px;
+}}
+.profil-row-btn .stButton > button {{
+    position: absolute !important; top: 0 !important; left: 0 !important;
+    width: 100% !important; height: 100% !important;
+    opacity: 0 !important; cursor: pointer !important;
+    border-radius: 0 !important;
+}}
+.profil-row-container {{ position: relative; }}
 
-/* ── Upgrade Tabelle ── */
-.upgrade-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: 'Albert Sans', sans-serif;
-    font-size: 15px;
-    margin: 16px 0;
-    color: #000000;
-}
-.upgrade-table th {
-    text-align: left;
-    padding: 10px 12px;
-    font-weight: 600;
-    color: #9b928b;
-    border-bottom: 1.5px solid #f0f0f0;
-}
-.upgrade-table th.plus { color: #b78715; text-align: center; }
-.upgrade-table th.free { text-align: center; }
-.upgrade-table td { padding: 12px 12px; border-bottom: 1px solid #f5f5f5; color: #000000; }
-.upgrade-table td.center { text-align: center; color: #9b928b; }
-.upgrade-table td.ja { text-align: center; color: #b78715; }
+/* Upgrade Tabelle: nur horizontale Linien */
+.upgrade-table {{
+    width: 100%; border-collapse: collapse;
+    font-family: 'Albert Sans', sans-serif; font-size: 15px; margin: 8px 0;
+}}
+.upgrade-table th {{
+    text-align: left; padding: 10px 8px; font-weight: 600;
+    color: #9b928b; border-bottom: 1.5px solid #f0f0f0;
+    border-left: none !important; border-right: none !important;
+}}
+.upgrade-table th.plan {{ text-align: center; width: 70px; }}
+.upgrade-table th.plus {{ color: #b78715; }}
+.upgrade-table td {{
+    padding: 14px 8px; border-bottom: 1px solid #f5f5f5;
+    color: #000; border-left: none !important; border-right: none !important;
+}}
+.upgrade-table td.center {{ text-align: center; color: #9b928b; }}
+.upgrade-table td.ja {{ text-align: center; color: #b78715; }}
 
-/* ── Scan Limit ── */
-.scan-limit-box {
-    background: #fffbf0;
-    border: 1.5px solid #b78715;
-    border-radius: 16px;
-    padding: 24px;
-    text-align: center;
-    margin: 24px 0;
-    font-family: 'Albert Sans', sans-serif;
-}
-.scan-limit-text { font-size: 16px; color: #000000; line-height: 1.6; margin-bottom: 20px; }
+/* Gericht Card */
+.gericht-card {{
+    background: #f9f9f9; border-radius: 14px; padding: 14px 16px;
+    margin-bottom: 10px; border: 1px solid #f0f0f0;
+}}
+.gericht-nr {{ font-size: 12px; color: #9b928b; margin-bottom: 2px; }}
+.gericht-name {{ font-size: 16px; font-weight: 600; color: #000; }}
+.gericht-preis {{ font-size: 14px; color: #b78715; font-weight: 500; margin-top: 4px; }}
+.ampel-sicher {{ color: #2e7d32; font-size: 13px; font-weight: 500; }}
+.ampel-warnung {{ color: #c0392b; font-size: 13px; font-weight: 500; }}
 
-/* ── Profil Zeilen ── */
-.profil-section-label {
+/* Disclaimer Box */
+.disclaimer-box {{
+    background: #f9f9f9; border-radius: 14px; padding: 20px; margin: 16px 0;
+    font-family: 'Albert Sans', sans-serif; font-size: 14px;
+    line-height: 1.7; color: #000;
+}}
+
+/* Scan Limit */
+.scan-limit-box {{
+    background: #fffbf0; border: 1.5px solid #b78715; border-radius: 16px;
+    padding: 24px; text-align: center; margin: 24px 0;
     font-family: 'Albert Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: #9b928b;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin: 20px 0 8px;
-}
+}}
 </style>
 """, unsafe_allow_html=True)
 
@@ -318,10 +298,14 @@ for k, v in {
     "profile": None,
     "user_allergene": [],
     "disclaimer_accepted": False,
+    # FIX: Eigenes Flag für Onboarding-Status (getrennt von disclaimer_accepted)
+    # Verhindert, dass allergen_settings fälschlicherweise denkt, kein Onboarding läuft
+    "onboarding_complete": False,
     "restaurant_logged_in": False,
     "restaurant_data": None,
     "active_tab": "scan",
     "local_scan_count": 0,
+    "camera_active": False,
 }.items():
     if k not in st.session_state:
         st.session_state[k] = v
@@ -338,7 +322,11 @@ def load_profile(user_id):
     if res.data:
         p = res.data
         st.session_state.profile = p
-        st.session_state.disclaimer_accepted = p.get("disclaimer_accepted", False)
+        # FIX: Lokales disclaimer_accepted NICHT mit False aus DB überschreiben.
+        # Wenn der User als Gast akzeptiert hat und sich danach einloggt/registriert,
+        # bleibt die Akzeptanz erhalten.
+        if not st.session_state.disclaimer_accepted:
+            st.session_state.disclaimer_accepted = p.get("disclaimer_accepted", False)
         st.session_state.user_allergene = [k for k in ALLERGEN_LABELS if p.get(k, False)]
 
 def save_allergene(selected):
@@ -367,12 +355,11 @@ def get_scan_count():
 def log_scan(scan_type):
     if not st.session_state.user:
         st.session_state.local_scan_count += 1
-        return
-    supabase.table("scan_log").insert({"user_id": st.session_state.user.id, "scan_type": scan_type}).execute()
+    else:
+        supabase.table("scan_log").insert({"user_id": st.session_state.user.id, "scan_type": scan_type}).execute()
 
 def is_premium():
-    p = st.session_state.profile
-    return p and p.get("plan") == "premium"
+    return st.session_state.profile and st.session_state.profile.get("plan") == "premium"
 
 def check_ampel(gericht, allergene):
     for a in allergene:
@@ -381,54 +368,47 @@ def check_ampel(gericht, allergene):
     return True, ""
 
 # ─────────────────────────────────────────────
-# BOTTOM NAVIGATION — immer sichtbar auf Hauptscreens
+# BOTTOM NAVIGATION
 # ─────────────────────────────────────────────
-MAIN_PAGES = {"scan", "restaurants", "speisekarte", "alternatives",
-              "profil_uebersicht", "upgrade", "restaurant_admin", "auth"}
-
 def bottom_nav():
     tab = st.session_state.active_tab
-    p_icon = ICON_PROFIL_AKTIV if tab == "profil" else ICON_PROFIL_PASSIV
-    s_icon = ICON_SCAN_AKTIV   if tab == "scan"   else ICON_SCAN_PASSIV
-    r_icon = ICON_REST_AKTIV   if tab == "restaurants" else ICON_REST_PASSIV
+    p_icon = ICON_PROFIL_AKTIV if tab == "profil"       else ICON_PROFIL_PASSIV
+    s_icon = ICON_SCAN_AKTIV   if tab == "scan"         else ICON_SCAN_PASSIV
+    r_icon = ICON_REST_AKTIV   if tab == "restaurants"  else ICON_REST_PASSIV
 
     st.markdown(f"""
-    <div class="bottom-nav-container">
-        <form method="get" style="flex:1;display:flex;justify-content:center">
-            <button class="nav-icon-btn" name="nav" value="profil" type="submit">
-                <img src="data:image/svg+xml;base64,{p_icon}" width="60px"/>
-            </button>
-        </form>
-        <form method="get" style="flex:1;display:flex;justify-content:center">
-            <button class="nav-icon-btn" name="nav" value="scan" type="submit">
-                <img src="data:image/svg+xml;base64,{s_icon}" width="60px"/>
-            </button>
-        </form>
-        <form method="get" style="flex:1;display:flex;justify-content:center">
-            <button class="nav-icon-btn" name="nav" value="restaurants" type="submit">
-                <img src="data:image/svg+xml;base64,{r_icon}" width="60px"/>
-            </button>
-        </form>
-    </div>
+    <style>
+    div[data-testid="column"]:nth-of-type(1) .stButton > button {{
+        background-image: url('data:image/svg+xml;base64,{p_icon}') !important;
+    }}
+    div[data-testid="column"]:nth-of-type(2) .stButton > button {{
+        background-image: url('data:image/svg+xml;base64,{s_icon}') !important;
+    }}
+    div[data-testid="column"]:nth-of-type(3) .stButton > button {{
+        background-image: url('data:image/svg+xml;base64,{r_icon}') !important;
+    }}
+    </style>
+    <div class="nav-wrapper">
     """, unsafe_allow_html=True)
 
-    # Streamlit-Buttons für die eigentliche Navigation (unsichtbar, aber funktional)
-    cols = st.columns(3)
-    with cols[0]:
-        if st.button("Profil", key="nb_profil", use_container_width=True):
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        if st.button("p", key="nb_p", use_container_width=True):
             st.session_state.active_tab = "profil"
             navigate("profil_uebersicht")
-    with cols[1]:
-        if st.button("Scan", key="nb_scan", use_container_width=True):
+    with c2:
+        if st.button("s", key="nb_s", use_container_width=True):
             st.session_state.active_tab = "scan"
             navigate("scan")
-    with cols[2]:
-        if st.button("Restaurants", key="nb_rest", use_container_width=True):
+    with c3:
+        if st.button("r", key="nb_r", use_container_width=True):
             st.session_state.active_tab = "restaurants"
             navigate("restaurants")
 
+    st.markdown("</div>", unsafe_allow_html=True)
+
 # ─────────────────────────────────────────────
-# SEITE 1: DISCLAIMER (kein Nav)
+# SEITE 1: DISCLAIMER
 # ─────────────────────────────────────────────
 def page_disclaimer():
     st.markdown("# 🥜 Nuss-Checker")
@@ -456,10 +436,13 @@ def page_disclaimer():
     st.button("App starten →", on_click=start, type="primary", disabled=not accepted)
 
 # ─────────────────────────────────────────────
-# SEITE 2: ALLERGEN-EINSTELLUNGEN (kein Nav beim Onboarding)
+# SEITE 2: ALLERGEN-EINSTELLUNGEN
 # ─────────────────────────────────────────────
 def page_allergen_settings():
-    is_onboarding = not st.session_state.disclaimer_accepted
+    # FIX: Onboarding-Status über eigenes Flag prüfen, nicht über disclaimer_accepted.
+    # disclaimer_accepted wird schon auf True gesetzt, bevor man hier hinnavigiert —
+    # daher war is_onboarding vorher immer False (= falsches Verhalten).
+    is_onboarding = not st.session_state.onboarding_complete
 
     if not is_onboarding:
         if st.button("← Zurück"):
@@ -468,7 +451,6 @@ def page_allergen_settings():
     st.markdown("# Meine Allergene")
     st.markdown('<p style="color:#9b928b;font-size:14px;margin-bottom:8px">Welche Allergene soll die App für dich hervorheben?</p>', unsafe_allow_html=True)
 
-    # Einfache native Streamlit-Checkboxen — sauber und funktional
     selected = []
     for key, label in ALLERGEN_LABELS.items():
         checked = st.checkbox(f"**{key}** – {label}", value=(key in st.session_state.user_allergene), key=f"al_{key}")
@@ -476,13 +458,15 @@ def page_allergen_settings():
             selected.append(key)
 
     st.markdown("---")
-    btn_label = "Speichern und weiter →" if is_onboarding else "Speichern"
 
     def save_and_go():
         save_allergene(selected)
+        # FIX: Onboarding als abgeschlossen markieren
+        st.session_state.onboarding_complete = True
         navigate("scan")
 
-    st.button(btn_label, on_click=save_and_go, type="primary")
+    btn = "Speichern und weiter →" if is_onboarding else "Speichern"
+    st.button(btn, on_click=save_and_go, type="primary")
 
     if not is_onboarding:
         bottom_nav()
@@ -491,17 +475,15 @@ def page_allergen_settings():
 # SEITE 3: AUTH
 # ─────────────────────────────────────────────
 def page_auth():
-    st.markdown("# 🥜 Nuss-Checker")
-    st.markdown("---")
+    tab_reg, tab_login = st.tabs(["Registrieren", "Einloggen"])
 
-    tab1, tab2 = st.tabs(["Registrieren", "Einloggen"])
-
-    with tab1:
+    with tab_reg:
         st.markdown("## Neues Konto")
-        reg_type = st.radio("", ["Ich bin Endkunde", "Ich registriere mich als Restaurant"], label_visibility="collapsed", key="reg_type")
-        email_r  = st.text_input("E-Mail-Adresse", key="reg_email")
-        pw_r     = st.text_input("Passwort (mindestens 6 Zeichen)", type="password", key="reg_pw")
-        pw_r2    = st.text_input("Passwort wiederholen", type="password", key="reg_pw2")
+        reg_type = st.radio("", ["Ich bin Endkunde", "Ich registriere mich als Restaurant"],
+                            label_visibility="collapsed", key="reg_type")
+        email_r = st.text_input("E-Mail-Adresse", key="reg_email")
+        pw_r    = st.text_input("Passwort (mindestens 6 Zeichen)", type="password", key="reg_pw")
+        pw_r2   = st.text_input("Passwort wiederholen", type="password", key="reg_pw2")
 
         is_restaurant = "Restaurant" in reg_type
         rest_name = rest_land = rest_plz = rest_adresse = rest_hnr = ""
@@ -512,9 +494,9 @@ def page_auth():
             rest_adresse = st.text_input("Adresse", key="ra")
             rest_hnr     = st.text_input("Hausnummer", key="rh")
 
-        all_ok = email_r and pw_r and pw_r2
+        all_ok = bool(email_r and pw_r and pw_r2)
         if is_restaurant:
-            all_ok = all_ok and rest_name and rest_land
+            all_ok = all_ok and bool(rest_name and rest_land)
 
         btn_lbl = "Registrieren" if is_restaurant else "Für 2,99 €/Monat registrieren"
 
@@ -531,18 +513,22 @@ def page_auth():
                 load_profile(res.user.id)
                 if is_restaurant:
                     supabase.table("restaurants").insert({
-                        "owner_id": res.user.id,
-                        "name": rest_name,
+                        "owner_id": res.user.id, "name": rest_name,
                         "adresse": f"{rest_adresse} {rest_hnr}, {rest_plz} {rest_land}"
                     }).execute()
-                navigate("disclaimer")
+                # FIX: Nach Registrierung nicht immer zum Disclaimer.
+                # User hat Disclaimer bereits akzeptiert → weiter zum nächsten sinnvollen Screen.
+                if st.session_state.disclaimer_accepted:
+                    navigate("scan")
+                else:
+                    navigate("disclaimer")
             except Exception as e:
                 st.error(f"Registrierung fehlgeschlagen: {e}")
 
         st.button(btn_lbl, on_click=do_register, type="primary", disabled=not all_ok)
         st.caption("Nach der Registrierung bitte E-Mail bestätigen.")
 
-    with tab2:
+    with tab_login:
         st.markdown("## Anmelden")
         email_l = st.text_input("E-Mail-Adresse", key="login_email")
         pw_l    = st.text_input("Passwort", type="password", key="login_pw")
@@ -552,6 +538,7 @@ def page_auth():
             try:
                 res = supabase.auth.sign_in_with_password({"email": email_l, "password": pw_l})
                 st.session_state.user = res.user
+                # load_profile überschreibt disclaimer_accepted nur falls es lokal False ist (FIX oben)
                 load_profile(res.user.id)
                 navigate("scan" if st.session_state.disclaimer_accepted else "disclaimer")
             except Exception as e:
@@ -571,7 +558,7 @@ def page_scan():
     if not is_premium() and scan_count >= FREEMIUM_SCAN_LIMIT:
         st.markdown(f"""
         <div class="scan-limit-box">
-            <p class="scan-limit-text">
+            <p style="font-size:16px;color:#000;line-height:1.6;margin-bottom:20px">
                 Du hast heute schon<br>
                 <strong>{FREEMIUM_SCAN_LIMIT}-mal geprüft.</strong><br>
                 Unterstütze uns, um unbegrenzt zu scannen!
@@ -582,24 +569,19 @@ def page_scan():
         bottom_nav()
         return
 
-    st.markdown("# Scannen")
     if not is_premium():
-        remaining = FREEMIUM_SCAN_LIMIT - scan_count
-        st.caption(f"Noch {remaining} von {FREEMIUM_SCAN_LIMIT} heutigen Scans verfügbar")
+        st.caption(f"Noch {FREEMIUM_SCAN_LIMIT - scan_count} von {FREEMIUM_SCAN_LIMIT} heutigen Scans")
 
     scan_mode = st.radio("", [
-        "🛒 Produktetikett (Supermarkt)",
+        "🛒 Produktetikett",
         "🌍 Fremdsprachiges Etikett",
-        "📋 Restaurant-Speisekarte (QR-Code)"
-    ], label_visibility="collapsed")
+        "📋 Restaurant QR-Code"
+    ], label_visibility="collapsed", horizontal=True)
 
-    st.markdown("---")
-    camera_image = st.camera_input("Kamera aktivieren")
+    camera_image = st.camera_input("", label_visibility="collapsed")
 
     if camera_image:
-        st.image(camera_image, use_column_width=True)
         st.markdown("---")
-
         if "Produktetikett" in scan_mode:
             log_scan("produkt")
             st.markdown("#### 🔍 Erkannte Allergene")
@@ -607,23 +589,16 @@ def page_scan():
             for a in st.session_state.user_allergene:
                 st.markdown(f'<p class="ampel-warnung">⚠️ Enthält: {ALLERGEN_SHORT[a]}</p>', unsafe_allow_html=True)
             if st.session_state.user_allergene:
-                st.markdown(" ")
-                st.button("🔄 Sichere Alternativen anzeigen", type="primary",
-                          on_click=lambda: navigate("alternatives"))
-
+                st.button("🔄 Sichere Alternativen", type="primary", on_click=lambda: navigate("alternatives"))
         elif "Fremdsprachig" in scan_mode:
             log_scan("fremdsprache")
-            st.markdown("#### 🌍 Übersetzung & Allergene")
             st.info("⚙️ Übersetzungs-API folgt in Phase 2")
             for a in st.session_state.user_allergene:
                 st.markdown(f'<p class="ampel-warnung">⚠️ Enthält: {ALLERGEN_SHORT[a]}</p>', unsafe_allow_html=True)
-
-        elif "QR-Code" in scan_mode:
+        else:
             log_scan("qr_code")
-            st.markdown("#### 📋 QR-Code erkannt")
             st.info("⚙️ QR-Decode folgt in Phase 2")
-            st.button("🍽️ Gefilterte Speisekarte öffnen", type="primary",
-                      on_click=lambda: navigate("restaurants"))
+            st.button("🍽️ Speisekarte öffnen", type="primary", on_click=lambda: navigate("restaurants"))
 
     bottom_nav()
 
@@ -632,7 +607,6 @@ def page_scan():
 # ─────────────────────────────────────────────
 def page_restaurants():
     st.session_state.active_tab = "restaurants"
-    st.markdown("# Restaurants")
 
     tab_karte, tab_liste, tab_lesezeichen = st.tabs(["Karte", "Liste", "Lesezeichen"])
 
@@ -657,18 +631,12 @@ def page_restaurants():
                         st.session_state["sel_rest_name"] = r["name"]
                         navigate("speisekarte")
                 with col2:
-                    fav = ICON_FAV_AKTIV if is_premium() else ICON_FAV_PASSIV
-                    st.markdown(svg_img(fav, "24px"), unsafe_allow_html=True)
-                st.markdown("<hr style='margin:6px 0'>", unsafe_allow_html=True)
+                    st.markdown(svg_img(ICON_FAV_PASSIV, "24px"), unsafe_allow_html=True)
+                st.markdown("<hr style='margin:4px 0'>", unsafe_allow_html=True)
 
     with tab_lesezeichen:
         if not is_premium():
-            st.markdown("""
-            <div class="disclaimer-box" style="text-align:center">
-                <strong>Plus-Feature</strong><br>
-                Lesezeichen sind im Plus-Tarif verfügbar.
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown('<div class="disclaimer-box" style="text-align:center"><strong>Plus-Feature</strong><br>Lesezeichen sind im Plus-Tarif verfügbar.</div>', unsafe_allow_html=True)
             st.button("Upgrade für 2,99 €/Monat", type="primary", on_click=lambda: navigate("upgrade"))
         else:
             st.info("Deine gespeicherten Restaurants erscheinen hier.")
@@ -681,13 +649,9 @@ def page_restaurants():
 def page_speisekarte():
     rest_name = st.session_state.get("sel_rest_name", "Speisekarte")
     rest_id   = st.session_state.get("sel_rest_id")
-
     st.markdown(f"# {rest_name}")
     if st.session_state.user_allergene:
-        tags = " · ".join([ALLERGEN_SHORT[a] for a in st.session_state.user_allergene])
-        st.caption(f"Gefiltert nach: {tags}")
-    else:
-        st.caption("Alle Gerichte werden angezeigt")
+        st.caption("Gefiltert nach: " + " · ".join([ALLERGEN_SHORT[a] for a in st.session_state.user_allergene]))
     st.markdown("---")
 
     try:
@@ -699,15 +663,12 @@ def page_speisekarte():
         st.error(f"Fehler: {e}")
         gerichte = []
 
-    if not gerichte:
-        st.markdown('<p style="color:#9b928b">Noch keine Gerichte eingetragen.</p>', unsafe_allow_html=True)
-
     for g in gerichte:
         sicher, warnung = check_ampel(g, st.session_state.user_allergene)
         if st.session_state.user_allergene and not sicher:
             continue
         preis = f"{g.get('preis','–')} €" if g.get("preis") else "–"
-        ampel = f'<span class="ampel-sicher">✓ Laut Angaben verträglich</span>' if sicher else f'<span class="ampel-warnung">⚠️ Enthält {warnung}</span>'
+        ampel = '<span class="ampel-sicher">✓ Verträglich</span>' if sicher else f'<span class="ampel-warnung">⚠️ Enthält {warnung}</span>'
         st.markdown(f"""
         <div class="gericht-card">
             <div class="gericht-nr">Nr. {g.get('gericht_nummer','–')}</div>
@@ -718,30 +679,31 @@ def page_speisekarte():
         </div>
         """, unsafe_allow_html=True)
 
+    if not gerichte:
+        st.markdown('<p style="color:#9b928b">Noch keine Gerichte eingetragen.</p>', unsafe_allow_html=True)
+
     bottom_nav()
 
 # ─────────────────────────────────────────────
 # SEITE 7: SICHERE ALTERNATIVEN
 # ─────────────────────────────────────────────
 def page_alternatives():
-    st.markdown("# ✅ Sichere Alternativen")
+    st.markdown("# Sichere Alternativen")
     if st.session_state.user_allergene:
         st.caption("Gefiltert nach: " + " · ".join([ALLERGEN_SHORT[a] for a in st.session_state.user_allergene]))
     st.markdown("---")
-    st.info("⚙️ Alternativen aus der Open Food Facts DB folgen in Phase 2.")
+    st.info("⚙️ Open Food Facts DB folgt in Phase 2.")
     import pandas as pd
     df = pd.DataFrame({
         "Produkt": ["Rote Linsen", "Kichererbsen", "Quinoa"],
         "Marke": ["Ja! Natürlich", "Spar Bio", "dm Bio"],
-        "Allergene": ["Keine", "Keine", "Keine"],
         "Status": ["✅ Sicher", "✅ Sicher", "✅ Sicher"]
     })
     st.dataframe(df, use_container_width=True)
-    st.caption("Platzhalterdaten · Quelle: Open Food Facts (folgt)")
     bottom_nav()
 
 # ─────────────────────────────────────────────
-# SEITE 8: PROFIL ÜBERSICHT
+# SEITE 8: PROFIL
 # ─────────────────────────────────────────────
 def page_profil_uebersicht():
     st.session_state.active_tab = "profil"
@@ -749,23 +711,69 @@ def page_profil_uebersicht():
 
     plan = "Plus" if is_premium() else "Gratistarif"
 
-    st.markdown('<div class="profil-section-label">Abonnement</div>', unsafe_allow_html=True)
-    col1, col2 = st.columns([7, 3])
-    with col1:
-        st.markdown(f'<p style="font-size:16px;font-weight:500;color:#000;margin:0">Abonnement</p>', unsafe_allow_html=True)
-    with col2:
-        st.markdown(f'<p style="font-size:14px;color:#9b928b;margin:0;text-align:right">{plan}</p>', unsafe_allow_html=True)
-    st.button("Upgrade →", key="to_upgrade", on_click=lambda: navigate("upgrade"))
+    st.markdown('<div class="profil-section-title">Konto</div>', unsafe_allow_html=True)
 
-    st.markdown("---")
-    st.markdown('<div class="profil-section-label">App</div>', unsafe_allow_html=True)
-    st.button("Meine Allergene →", key="to_allergene", on_click=lambda: navigate("allergen_settings"))
-    st.markdown("<div style='height:4px'></div>", unsafe_allow_html=True)
-    st.button("Sprache →", key="to_sprache", on_click=lambda: st.toast("Mehrsprachigkeit folgt in Phase 2 ⚙️"))
+    st.markdown(f"""
+    <div class="profil-row" id="row-abo">
+        <span class="profil-row-label">Abonnement</span>
+        <span class="profil-row-right">
+            <span class="profil-row-value">{plan}</span>
+            <span class="profil-row-arrow">›</span>
+        </span>
+    </div>
+    """, unsafe_allow_html=True)
+    if st.button("Abonnement", key="btn_abo", use_container_width=True):
+        navigate("upgrade")
+    st.markdown("""
+    <style>
+    button[data-key="btn_abo"] {
+        position: relative !important; margin-top: -52px !important;
+        height: 52px !important; opacity: 0 !important; z-index: 10 !important;
+        border-radius: 0 !important; background: transparent !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-    st.markdown("---")
-    st.caption("Du bist ein Restaurant?")
-    st.button("🏪 Restaurant-Login", key="to_rest_login", on_click=lambda: navigate("restaurant_admin"))
+    st.markdown('<div class="profil-section-title">App</div>', unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="profil-row">
+        <span class="profil-row-label">Meine Allergene</span>
+        <span class="profil-row-arrow">›</span>
+    </div>
+    """, unsafe_allow_html=True)
+    if st.button("Meine Allergene", key="btn_alg", use_container_width=True):
+        navigate("allergen_settings")
+    st.markdown("""
+    <style>
+    button[data-key="btn_alg"] {
+        position: relative !important; margin-top: -52px !important;
+        height: 52px !important; opacity: 0 !important; z-index: 10 !important;
+        border-radius: 0 !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="profil-row">
+        <span class="profil-row-label">Sprache</span>
+        <span class="profil-row-right">
+            <span class="profil-row-value">Deutsch</span>
+            <span class="profil-row-arrow">›</span>
+        </span>
+    </div>
+    """, unsafe_allow_html=True)
+    if st.button("Sprache", key="btn_lang", use_container_width=True):
+        st.toast("Mehrsprachigkeit folgt in Phase 2 ⚙️")
+    st.markdown("""
+    <style>
+    button[data-key="btn_lang"] {
+        position: relative !important; margin-top: -52px !important;
+        height: 52px !important; opacity: 0 !important; z-index: 10 !important;
+        border-radius: 0 !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
     st.markdown("---")
     if st.session_state.user:
@@ -776,7 +784,8 @@ def page_profil_uebersicht():
             st.rerun()
         st.button("🚪 Abmelden", on_click=do_logout)
     else:
-        st.button("🔑 Anmelden / Registrieren", on_click=lambda: navigate("auth"))
+        st.caption("Noch kein Konto?")
+        st.button("Anmelden / Registrieren", type="secondary", on_click=lambda: navigate("auth"))
 
     bottom_nav()
 
@@ -794,14 +803,26 @@ def page_upgrade():
         <thead>
             <tr>
                 <th>Funktion</th>
-                <th class="free">Free</th>
-                <th class="plus">Plus</th>
+                <th class="plan free">Free</th>
+                <th class="plan plus">Plus</th>
             </tr>
         </thead>
         <tbody>
-            <tr><td>Tägliche Scans</td><td class="center">3</td><td class="ja">∞</td></tr>
-            <tr><td>Sichere Alternativen</td><td class="center">–</td><td class="ja">{haken}</td></tr>
-            <tr><td>Lesezeichen</td><td class="center">–</td><td class="ja">{haken}</td></tr>
+            <tr>
+                <td>Tägliche Scans</td>
+                <td class="center">3</td>
+                <td class="ja">∞</td>
+            </tr>
+            <tr>
+                <td>Sichere Alternativen</td>
+                <td class="center">–</td>
+                <td class="ja">{haken}</td>
+            </tr>
+            <tr>
+                <td>Lesezeichen</td>
+                <td class="center">–</td>
+                <td class="ja">{haken}</td>
+            </tr>
         </tbody>
     </table>
     """, unsafe_allow_html=True)
@@ -819,18 +840,17 @@ def page_restaurant_admin():
 
     if not st.session_state.restaurant_logged_in:
         st.markdown("## Login")
-        email_r = st.text_input("E-Mail", key="rl_email")
-        pw_r    = st.text_input("Passwort", type="password", key="rl_pw")
+        email_r = st.text_input("E-Mail", key="rl_e")
+        pw_r    = st.text_input("Passwort", type="password", key="rl_p")
 
         def do_rest_login():
             try:
                 res = supabase.auth.sign_in_with_password({"email": email_r, "password": pw_r})
-                user = res.user
-                rr = supabase.table("restaurants").select("*").eq("owner_id", user.id).single().execute()
+                rr = supabase.table("restaurants").select("*").eq("owner_id", res.user.id).single().execute()
                 if rr.data:
                     st.session_state.restaurant_logged_in = True
                     st.session_state.restaurant_data = rr.data
-                    st.session_state.user = user
+                    st.session_state.user = res.user
                     st.rerun()
                 else:
                     st.error("Kein Restaurant-Account gefunden.")
@@ -838,34 +858,28 @@ def page_restaurant_admin():
                 st.error(f"Login fehlgeschlagen: {e}")
 
         st.button("Einloggen", on_click=do_rest_login, type="primary")
-
     else:
         r = st.session_state.restaurant_data
         st.success(f"Eingeloggt als: **{r['name']}**")
         st.markdown("---")
         st.markdown("## Gericht hinzufügen")
-
         gericht_nr   = st.text_input("Gerichtnummer (z.B. 14 oder B2)")
         gericht_name = st.text_input("Name des Gerichts")
         beschreibung = st.text_area("Beschreibung")
         preis        = st.number_input("Preis (€)", min_value=0.0, step=0.5)
-
         st.markdown("**Enthaltene Allergene:**")
         cols = st.columns(4)
         allergen_sel = {}
         for i, (key, lbl) in enumerate(ALLERGEN_SHORT.items()):
             with cols[i % 4]:
-                allergen_sel[key] = st.checkbox(f"{key} – {lbl}", key=f"adm_{key}")
+                allergen_sel[key] = st.checkbox(f"{key}", key=f"adm_{key}", help=lbl)
 
         def save_gericht():
             try:
                 supabase.table("gerichte").insert({
-                    "restaurant_id": r["id"],
-                    "gericht_nummer": gericht_nr,
-                    "name": gericht_name,
-                    "beschreibung": beschreibung,
-                    "preis": preis,
-                    **allergen_sel
+                    "restaurant_id": r["id"], "gericht_nummer": gericht_nr,
+                    "name": gericht_name, "beschreibung": beschreibung,
+                    "preis": preis, **allergen_sel
                 }).execute()
                 st.success("✅ Gericht gespeichert!")
             except Exception as e:
@@ -873,13 +887,11 @@ def page_restaurant_admin():
 
         st.button("💾 Gericht speichern", on_click=save_gericht, type="primary")
         st.markdown("---")
-
-        def rest_logout():
-            st.session_state.restaurant_logged_in = False
-            st.session_state.restaurant_data = None
+        st.button("🚪 Ausloggen", on_click=lambda: [
+            st.session_state.__setitem__("restaurant_logged_in", False),
+            st.session_state.__setitem__("restaurant_data", None),
             navigate("profil_uebersicht")
-
-        st.button("🚪 Ausloggen", on_click=rest_logout)
+        ])
 
     bottom_nav()
 
@@ -888,25 +900,17 @@ def page_restaurant_admin():
 # ─────────────────────────────────────────────
 page = st.session_state.page
 
-if page == "disclaimer":
-    page_disclaimer()
-elif page == "allergen_settings":
-    page_allergen_settings()
-elif page == "auth":
-    page_auth()
-elif page == "scan":
-    page_scan()
-elif page == "restaurants":
-    page_restaurants()
-elif page == "speisekarte":
-    page_speisekarte()
-elif page == "alternatives":
-    page_alternatives()
-elif page == "profil_uebersicht":
-    page_profil_uebersicht()
-elif page == "upgrade":
-    page_upgrade()
-elif page == "restaurant_admin":
-    page_restaurant_admin()
-else:
-    page_scan()
+routes = {
+    "disclaimer":        page_disclaimer,
+    "allergen_settings": page_allergen_settings,
+    "auth":              page_auth,
+    "scan":              page_scan,
+    "restaurants":       page_restaurants,
+    "speisekarte":       page_speisekarte,
+    "alternatives":      page_alternatives,
+    "profil_uebersicht": page_profil_uebersicht,
+    "upgrade":           page_upgrade,
+    "restaurant_admin":  page_restaurant_admin,
+}
+
+routes.get(page, page_scan)()
