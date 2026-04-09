@@ -23,106 +23,106 @@ def svg_img(b64, width="100%"):
     return f'<img src="data:image/svg+xml;base64,{b64}" width="{width}" style="display:block"/>'
 
 # ─────────────────────────────────────────────
-# CSS: alle Fixes
+# CSS
 # ─────────────────────────────────────────────
-st.markdown(f"""
+st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600;700&display=swap');
 
 /* ── Hide Streamlit chrome ── */
 #MainMenu, header[data-testid="stHeader"], [data-testid="stToolbar"],
 footer, .viewerBadge_container__1QSob, [data-testid="stDecoration"],
-.stDeployButton, [data-testid="manage-app-button"] {{
+.stDeployButton, [data-testid="manage-app-button"] {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
-}}
+}
 
 /* ── Basis ── */
-html, body, [class*="css"] {{
+html, body, [class*="css"] {
     font-family: 'Albert Sans', sans-serif !important;
     background: #fff;
     -webkit-text-size-adjust: 100%;
-}}
-.stApp {{ background: #fff; }}
-.block-container {{
+}
+.stApp { background: #fff; }
+.block-container {
     padding: 16px 16px 100px 16px !important;
     max-width: 430px !important;
     margin: 0 auto !important;
-}}
+}
 
 /* ── Typografie ── */
-h1 {{
+h1 {
     font-family: 'Albert Sans', sans-serif !important;
     font-size: 26px !important; font-weight: 700 !important;
     color: #b78715 !important; margin-bottom: 4px !important;
-}}
-h2 {{
+}
+h2 {
     font-family: 'Albert Sans', sans-serif !important;
     font-size: 16px !important; font-weight: 600 !important;
     color: #9b928b !important; margin: 14px 0 4px !important;
-}}
-p, .stMarkdown p {{
+}
+p, .stMarkdown p {
     font-family: 'Albert Sans', sans-serif !important;
     color: #000 !important; font-size: 15px !important;
-}}
-label {{ font-family: 'Albert Sans', sans-serif !important; color: #000 !important; }}
+}
+label { font-family: 'Albert Sans', sans-serif !important; color: #000 !important; }
 
 /* ── Buttons allgemein ── */
-.stButton > button {{
+.stButton > button {
     font-family: 'Albert Sans', sans-serif !important;
     border-radius: 12px !important; cursor: pointer !important;
     transition: opacity 0.2s !important;
-}}
-.stButton > button[kind="primary"] {{
+}
+.stButton > button[kind="primary"] {
     background: #b78715 !important; color: #fff !important;
     border: none !important; font-weight: 600 !important;
     font-size: 16px !important; padding: 14px 24px !important; width: 100% !important;
-}}
-.stButton > button[kind="primary"]:hover {{ opacity: 0.88 !important; }}
-.stButton > button[kind="primary"]:disabled {{
+}
+.stButton > button[kind="primary"]:hover { opacity: 0.88 !important; }
+.stButton > button[kind="primary"]:disabled {
     background: #e0d5c0 !important; color: #a0906a !important;
-}}
-.stButton > button[kind="secondary"] {{
+}
+.stButton > button[kind="secondary"] {
     background: transparent !important; color: #3c577a !important;
     border: 1.5px solid #3c577a !important; font-weight: 500 !important;
     font-size: 15px !important; padding: 10px 20px !important; width: 100% !important;
-}}
-.stButton > button:not([kind]) {{
+}
+.stButton > button:not([kind]) {
     background: transparent !important; border: none !important;
     color: #3c577a !important; font-weight: 500 !important;
     padding: 4px 0 !important; box-shadow: none !important;
-}}
+}
 
 /* ── Inputs ── */
-.stTextInput > div > div > input, .stTextArea textarea, .stNumberInput input {{
+.stTextInput > div > div > input, .stTextArea textarea, .stNumberInput input {
     font-family: 'Albert Sans', sans-serif !important;
     border: 1.5px solid #e0e0e0 !important; border-radius: 10px !important;
     padding: 12px 14px !important; font-size: 15px !important;
     color: #000 !important; background: #f9f9f9 !important;
-}}
-.stTextInput > div > div > input:focus, .stTextArea textarea:focus {{
+}
+.stTextInput > div > div > input:focus, .stTextArea textarea:focus {
     border-color: #b78715 !important;
     box-shadow: 0 0 0 2px rgba(183,135,21,0.15) !important;
-}}
-.stTextInput label, .stTextArea label, .stNumberInput label {{
+}
+.stTextInput label, .stTextArea label, .stNumberInput label {
     color: #9b928b !important; font-size: 13px !important; font-weight: 500 !important;
-}}
+}
 
 /* ── Checkbox ── */
-.stCheckbox input[type="checkbox"] {{ accent-color: #b78715 !important; width: 18px !important; height: 18px !important; }}
-.stCheckbox label span {{ color: #000 !important; font-size: 14px !important; }}
+.stCheckbox input[type="checkbox"] { accent-color: #b78715 !important; width: 18px !important; height: 18px !important; }
+.stCheckbox label span { color: #000 !important; font-size: 14px !important; }
 
 /* ── Radio ── */
-.stRadio label {{ color: #000 !important; font-size: 15px !important; }}
-.stRadio input[type="radio"]:checked {{ accent-color: #b78715 !important; }}
+.stRadio label { color: #000 !important; font-size: 15px !important; }
+.stRadio input[type="radio"]:checked { accent-color: #b78715 !important; }
 
 /* ── Tabs – kein beweglicher Unterstrich ── */
-.stTabs [data-baseweb="tab-list"] {{
+.stTabs [data-baseweb="tab-list"] {
     background: transparent !important;
     border-bottom: 1.5px solid #f0f0f0 !important; gap: 0 !important;
-}}
-.stTabs [data-baseweb="tab"] {{
+}
+.stTabs [data-baseweb="tab"] {
     font-family: 'Albert Sans', sans-serif !important;
     font-weight: 500 !important; font-size: 15px !important;
     color: #9b928b !important;
@@ -130,50 +130,62 @@ label {{ font-family: 'Albert Sans', sans-serif !important; color: #000 !importa
     padding: 12px 24px !important; flex: 1 !important;
     justify-content: center !important;
     transition: none !important;
-}}
-.stTabs [aria-selected="true"] {{
+}
+.stTabs [aria-selected="true"] {
     color: #b78715 !important;
     border-bottom: 2px solid #b78715 !important;
     background: transparent !important;
-}}
-.stTabs [data-baseweb="tab-highlight"] {{ display: none !important; }}
-.stTabs [data-baseweb="tab-border"] {{ display: none !important; }}
+}
+.stTabs [data-baseweb="tab-highlight"] { display: none !important; }
+.stTabs [data-baseweb="tab-border"] { display: none !important; }
 
 /* ── Alerts ── */
-.stAlert {{ border-radius: 12px !important; font-family: 'Albert Sans', sans-serif !important; }}
-.stCaption {{ color: #9b928b !important; font-size: 13px !important; }}
-hr {{ border: none !important; border-top: 1px solid #f0f0f0 !important; margin: 10px 0 !important; }}
+.stAlert { border-radius: 12px !important; font-family: 'Albert Sans', sans-serif !important; }
+.stCaption { color: #9b928b !important; font-size: 13px !important; }
+hr { border: none !important; border-top: 1px solid #f0f0f0 !important; margin: 10px 0 !important; }
 
-/* ── Kamera Fullscreen ── */
-[data-testid="stCameraInput"] {{
+/* ── Kamera: fast-fullscreen, lässt 72px für die Nav-Bar frei ──
+   FIX: vorher 100vh → Nav wurde vollständig überdeckt */
+[data-testid="stCameraInput"] {
     position: fixed !important; top: 0 !important; left: 0 !important;
-    width: 100vw !important; height: 100vh !important;
+    width: 100vw !important; height: calc(100vh - 72px) !important;
     z-index: 8000 !important; background: #000 !important;
     display: flex !important; flex-direction: column !important;
-}}
-[data-testid="stCameraInput"] video {{
-    width: 100% !important; height: calc(100vh - 80px) !important;
+}
+[data-testid="stCameraInput"] video {
+    width: 100% !important; height: calc(100vh - 72px - 80px) !important;
     object-fit: cover !important;
-}}
-[data-testid="stCameraInput"] button {{
-    position: absolute !important; bottom: 20px !important;
+}
+[data-testid="stCameraInput"] button {
+    position: absolute !important; bottom: 16px !important;
     left: 50% !important; transform: translateX(-50%) !important;
     background: #b78715 !important; color: #fff !important;
     border: none !important; border-radius: 50px !important;
     padding: 14px 40px !important; font-size: 16px !important;
     font-weight: 600 !important; z-index: 8001 !important;
-}}
+}
 
-/* ── Bottom Navigation ── */
-.nav-wrapper {{
-    position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 100%; max-width: 430px;
-    background: #fff; border-top: 1px solid #f0f0f0;
-    z-index: 9000; box-shadow: 0 -2px 12px rgba(0,0,0,0.07);
-    display: flex; align-items: stretch;
-}}
-/* FIX: background-size auf "auto 68px" → Icon füllt die Nav-Bar-Höhe korrekt aus */
-.nav-wrapper .stButton > button {{
+/* ── Bottom Navigation ──
+   FIX: Statt .nav-wrapper (das Streamlit-Buttons nie wirklich enthielt)
+   wird jetzt der letzte stHorizontalBlock direkt fixed ans Bottom gesetzt.
+   Streamlit rendert st.columns() als stHorizontalBlock — bottom_nav() ist
+   immer das letzte Columns-Element auf der Seite. */
+[data-testid="stHorizontalBlock"]:last-of-type {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 100% !important;
+    max-width: 430px !important;
+    background: #fff !important;
+    border-top: 1px solid #f0f0f0 !important;
+    z-index: 9000 !important;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.07) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+}
+[data-testid="stHorizontalBlock"]:last-of-type .stButton > button {
     background-color: transparent !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
@@ -182,74 +194,74 @@ hr {{ border: none !important; border-top: 1px solid #f0f0f0 !important; margin:
     width: 100% !important; height: 72px !important;
     color: transparent !important; font-size: 1px !important;
     box-shadow: none !important; padding: 0 !important;
-}}
+}
 
 /* Profil List Rows */
-.profil-row {{
+.profil-row {
     display: flex; align-items: center; justify-content: space-between;
     padding: 16px 4px; border-bottom: 1px solid #f0f0f0; cursor: pointer;
-}}
-.profil-row-label {{ font-size: 16px; color: #000; font-weight: 400; font-family: 'Albert Sans', sans-serif; }}
-.profil-row-right {{ display: flex; align-items: center; gap: 8px; }}
-.profil-row-value {{ font-size: 14px; color: #9b928b; font-family: 'Albert Sans', sans-serif; }}
-.profil-row-arrow {{ font-size: 16px; color: #9b928b; }}
-.profil-section-title {{
+}
+.profil-row-label { font-size: 16px; color: #000; font-weight: 400; font-family: 'Albert Sans', sans-serif; }
+.profil-row-right { display: flex; align-items: center; gap: 8px; }
+.profil-row-value { font-size: 14px; color: #9b928b; font-family: 'Albert Sans', sans-serif; }
+.profil-row-arrow { font-size: 16px; color: #9b928b; }
+.profil-section-title {
     font-size: 13px; font-weight: 600; color: #9b928b;
     text-transform: uppercase; letter-spacing: 0.5px;
     font-family: 'Albert Sans', sans-serif;
     margin: 20px 0 0; padding-bottom: 2px;
-}}
-.profil-row-btn .stButton > button {{
+}
+.profil-row-btn .stButton > button {
     position: absolute !important; top: 0 !important; left: 0 !important;
     width: 100% !important; height: 100% !important;
     opacity: 0 !important; cursor: pointer !important;
     border-radius: 0 !important;
-}}
-.profil-row-container {{ position: relative; }}
+}
+.profil-row-container { position: relative; }
 
 /* Upgrade Tabelle: nur horizontale Linien */
-.upgrade-table {{
+.upgrade-table {
     width: 100%; border-collapse: collapse;
     font-family: 'Albert Sans', sans-serif; font-size: 15px; margin: 8px 0;
-}}
-.upgrade-table th {{
+}
+.upgrade-table th {
     text-align: left; padding: 10px 8px; font-weight: 600;
     color: #9b928b; border-bottom: 1.5px solid #f0f0f0;
     border-left: none !important; border-right: none !important;
-}}
-.upgrade-table th.plan {{ text-align: center; width: 70px; }}
-.upgrade-table th.plus {{ color: #b78715; }}
-.upgrade-table td {{
+}
+.upgrade-table th.plan { text-align: center; width: 70px; }
+.upgrade-table th.plus { color: #b78715; }
+.upgrade-table td {
     padding: 14px 8px; border-bottom: 1px solid #f5f5f5;
     color: #000; border-left: none !important; border-right: none !important;
-}}
-.upgrade-table td.center {{ text-align: center; color: #9b928b; }}
-.upgrade-table td.ja {{ text-align: center; color: #b78715; }}
+}
+.upgrade-table td.center { text-align: center; color: #9b928b; }
+.upgrade-table td.ja { text-align: center; color: #b78715; }
 
 /* Gericht Card */
-.gericht-card {{
+.gericht-card {
     background: #f9f9f9; border-radius: 14px; padding: 14px 16px;
     margin-bottom: 10px; border: 1px solid #f0f0f0;
-}}
-.gericht-nr {{ font-size: 12px; color: #9b928b; margin-bottom: 2px; }}
-.gericht-name {{ font-size: 16px; font-weight: 600; color: #000; }}
-.gericht-preis {{ font-size: 14px; color: #b78715; font-weight: 500; margin-top: 4px; }}
-.ampel-sicher {{ color: #2e7d32; font-size: 13px; font-weight: 500; }}
-.ampel-warnung {{ color: #c0392b; font-size: 13px; font-weight: 500; }}
+}
+.gericht-nr { font-size: 12px; color: #9b928b; margin-bottom: 2px; }
+.gericht-name { font-size: 16px; font-weight: 600; color: #000; }
+.gericht-preis { font-size: 14px; color: #b78715; font-weight: 500; margin-top: 4px; }
+.ampel-sicher { color: #2e7d32; font-size: 13px; font-weight: 500; }
+.ampel-warnung { color: #c0392b; font-size: 13px; font-weight: 500; }
 
 /* Disclaimer Box */
-.disclaimer-box {{
+.disclaimer-box {
     background: #f9f9f9; border-radius: 14px; padding: 20px; margin: 16px 0;
     font-family: 'Albert Sans', sans-serif; font-size: 14px;
     line-height: 1.7; color: #000;
-}}
+}
 
 /* Scan Limit */
-.scan-limit-box {{
+.scan-limit-box {
     background: #fffbf0; border: 1.5px solid #b78715; border-radius: 16px;
     padding: 24px; text-align: center; margin: 24px 0;
     font-family: 'Albert Sans', sans-serif;
-}}
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -298,8 +310,6 @@ for k, v in {
     "profile": None,
     "user_allergene": [],
     "disclaimer_accepted": False,
-    # FIX: Eigenes Flag für Onboarding-Status (getrennt von disclaimer_accepted)
-    # Verhindert, dass allergen_settings fälschlicherweise denkt, kein Onboarding läuft
     "onboarding_complete": False,
     "restaurant_logged_in": False,
     "restaurant_data": None,
@@ -322,9 +332,7 @@ def load_profile(user_id):
     if res.data:
         p = res.data
         st.session_state.profile = p
-        # FIX: Lokales disclaimer_accepted NICHT mit False aus DB überschreiben.
-        # Wenn der User als Gast akzeptiert hat und sich danach einloggt/registriert,
-        # bleibt die Akzeptanz erhalten.
+        # Lokales disclaimer_accepted NICHT mit False aus DB überschreiben
         if not st.session_state.disclaimer_accepted:
             st.session_state.disclaimer_accepted = p.get("disclaimer_accepted", False)
         st.session_state.user_allergene = [k for k in ALLERGEN_LABELS if p.get(k, False)]
@@ -369,26 +377,28 @@ def check_ampel(gericht, allergene):
 
 # ─────────────────────────────────────────────
 # BOTTOM NAVIGATION
+# FIX: Icon-Injektion jetzt via :last-of-type-Selektor,
+# der direkt den stHorizontalBlock der Nav trifft.
+# Kein nav-wrapper-div mehr nötig.
 # ─────────────────────────────────────────────
 def bottom_nav():
     tab = st.session_state.active_tab
-    p_icon = ICON_PROFIL_AKTIV if tab == "profil"       else ICON_PROFIL_PASSIV
-    s_icon = ICON_SCAN_AKTIV   if tab == "scan"         else ICON_SCAN_PASSIV
-    r_icon = ICON_REST_AKTIV   if tab == "restaurants"  else ICON_REST_PASSIV
+    p_icon = ICON_PROFIL_AKTIV if tab == "profil"      else ICON_PROFIL_PASSIV
+    s_icon = ICON_SCAN_AKTIV   if tab == "scan"        else ICON_SCAN_PASSIV
+    r_icon = ICON_REST_AKTIV   if tab == "restaurants" else ICON_REST_PASSIV
 
     st.markdown(f"""
     <style>
-    div[data-testid="column"]:nth-of-type(1) .stButton > button {{
+    [data-testid="stHorizontalBlock"]:last-of-type [data-testid="column"]:nth-child(1) .stButton > button {{
         background-image: url('data:image/svg+xml;base64,{p_icon}') !important;
     }}
-    div[data-testid="column"]:nth-of-type(2) .stButton > button {{
+    [data-testid="stHorizontalBlock"]:last-of-type [data-testid="column"]:nth-child(2) .stButton > button {{
         background-image: url('data:image/svg+xml;base64,{s_icon}') !important;
     }}
-    div[data-testid="column"]:nth-of-type(3) .stButton > button {{
+    [data-testid="stHorizontalBlock"]:last-of-type [data-testid="column"]:nth-child(3) .stButton > button {{
         background-image: url('data:image/svg+xml;base64,{r_icon}') !important;
     }}
     </style>
-    <div class="nav-wrapper">
     """, unsafe_allow_html=True)
 
     c1, c2, c3 = st.columns(3)
@@ -404,8 +414,6 @@ def bottom_nav():
         if st.button("r", key="nb_r", use_container_width=True):
             st.session_state.active_tab = "restaurants"
             navigate("restaurants")
-
-    st.markdown("</div>", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────
 # SEITE 1: DISCLAIMER
@@ -439,9 +447,6 @@ def page_disclaimer():
 # SEITE 2: ALLERGEN-EINSTELLUNGEN
 # ─────────────────────────────────────────────
 def page_allergen_settings():
-    # FIX: Onboarding-Status über eigenes Flag prüfen, nicht über disclaimer_accepted.
-    # disclaimer_accepted wird schon auf True gesetzt, bevor man hier hinnavigiert —
-    # daher war is_onboarding vorher immer False (= falsches Verhalten).
     is_onboarding = not st.session_state.onboarding_complete
 
     if not is_onboarding:
@@ -461,7 +466,6 @@ def page_allergen_settings():
 
     def save_and_go():
         save_allergene(selected)
-        # FIX: Onboarding als abgeschlossen markieren
         st.session_state.onboarding_complete = True
         navigate("scan")
 
@@ -516,12 +520,7 @@ def page_auth():
                         "owner_id": res.user.id, "name": rest_name,
                         "adresse": f"{rest_adresse} {rest_hnr}, {rest_plz} {rest_land}"
                     }).execute()
-                # FIX: Nach Registrierung nicht immer zum Disclaimer.
-                # User hat Disclaimer bereits akzeptiert → weiter zum nächsten sinnvollen Screen.
-                if st.session_state.disclaimer_accepted:
-                    navigate("scan")
-                else:
-                    navigate("disclaimer")
+                navigate("scan" if st.session_state.disclaimer_accepted else "disclaimer")
             except Exception as e:
                 st.error(f"Registrierung fehlgeschlagen: {e}")
 
@@ -538,7 +537,6 @@ def page_auth():
             try:
                 res = supabase.auth.sign_in_with_password({"email": email_l, "password": pw_l})
                 st.session_state.user = res.user
-                # load_profile überschreibt disclaimer_accepted nur falls es lokal False ist (FIX oben)
                 load_profile(res.user.id)
                 navigate("scan" if st.session_state.disclaimer_accepted else "disclaimer")
             except Exception as e:
