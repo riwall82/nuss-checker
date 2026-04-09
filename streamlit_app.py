@@ -380,15 +380,16 @@ def bottom_nav():
     s_icon = ICON_SCAN_AKTIV   if tab == "scan"        else ICON_SCAN_PASSIV
     r_icon = ICON_REST_AKTIV   if tab == "restaurants" else ICON_REST_PASSIV
 
+    # FIX: target="_self" verhindert, dass Links in neuem Tab öffnen
     st.markdown(f"""
     <div class="nc-bottom-nav">
-        <a href="?page=profil_uebersicht">
+        <a href="?page=profil_uebersicht" target="_self">
             <img src="data:image/svg+xml;base64,{p_icon}" />
         </a>
-        <a href="?page=scan">
+        <a href="?page=scan" target="_self">
             <img src="data:image/svg+xml;base64,{s_icon}" />
         </a>
-        <a href="?page=restaurants">
+        <a href="?page=restaurants" target="_self">
             <img src="data:image/svg+xml;base64,{r_icon}" />
         </a>
     </div>
@@ -482,6 +483,7 @@ def page_auth():
             all_ok = all_ok and bool(rest_name and rest_land)
 
         btn_lbl = "Registrieren" if is_restaurant else "Für 2,99 €/Monat registrieren"
+        # (kein Pfeil im Label)
 
         def do_register():
             if pw_r != pw_r2:
@@ -503,7 +505,7 @@ def page_auth():
             except Exception as e:
                 st.error(f"Registrierung fehlgeschlagen: {e}")
 
-        st.button(btn_lbl, on_click=do_register, type="primary", disabled=not all_ok)
+        st.button(btn_lbl, on_click=do_register, type="primary", use_container_width=True, disabled=not all_ok)
         st.caption("Nach der Registrierung bitte E-Mail bestätigen.")
 
     with tab_login:
@@ -541,7 +543,7 @@ def page_scan():
             </p>
         </div>
         """, unsafe_allow_html=True)
-        st.button("Upgrade für 2,99 €/Monat", type="primary", on_click=lambda: navigate("upgrade"))
+        st.button("Upgrade für 2,99 €/Monat", type="primary", use_container_width=True, on_click=lambda: navigate("upgrade"))
         bottom_nav()
         return
 
@@ -611,7 +613,7 @@ def page_restaurants():
     with tab_lesezeichen:
         if not is_premium():
             st.markdown('<div class="disclaimer-box" style="text-align:center"><strong>Plus-Feature</strong><br>Lesezeichen sind im Plus-Tarif verfügbar.</div>', unsafe_allow_html=True)
-            st.button("Upgrade für 2,99 €/Monat", type="primary", on_click=lambda: navigate("upgrade"))
+            st.button("Upgrade für 2,99 €/Monat", type="primary", use_container_width=True, on_click=lambda: navigate("upgrade"))
         else:
             st.info("Deine gespeicherten Restaurants erscheinen hier.")
 
@@ -686,7 +688,7 @@ def page_profil_uebersicht():
     # ── Sektion: Konto ──
     st.markdown('<div class="profil-section-title">Konto</div>', unsafe_allow_html=True)
     st.markdown(f"""
-    <a href="?page=upgrade" class="profil-row">
+    <a href="?page=upgrade" class="profil-row" target="_self">
         <span class="profil-row-label">Abonnement</span>
         <span class="profil-row-right">
             <span class="profil-row-value">{plan}</span>
@@ -694,16 +696,24 @@ def page_profil_uebersicht():
         </span>
     </a>
     """, unsafe_allow_html=True)
+    # FIX: Anmelden/Registrieren als Listenzeile unter Konto – kein Button, kein Heading
+    if not st.session_state.user:
+        st.markdown("""
+        <a href="?page=auth" class="profil-row" target="_self">
+            <span class="profil-row-label">Anmelden / Registrieren</span>
+            <span class="profil-row-arrow">›</span>
+        </a>
+        """, unsafe_allow_html=True)
 
     # ── Sektion: App ──
     st.markdown('<div class="profil-section-title">App</div>', unsafe_allow_html=True)
     st.markdown("""
-    <a href="?page=allergen_settings" class="profil-row">
+    <a href="?page=allergen_settings" class="profil-row" target="_self">
         <span class="profil-row-label">Meine Allergene</span>
         <span class="profil-row-arrow">›</span>
     </a>
     """, unsafe_allow_html=True)
-    # Sprache: noch nicht navigierbar → nicht-klickbare Zeile
+    # Sprache: noch nicht navigierbar → nicht-klickbare Zeile (gedimmt)
     st.markdown("""
     <div class="profil-row">
         <span class="profil-row-label" style="color:#9b928b">Sprache</span>
@@ -714,18 +724,15 @@ def page_profil_uebersicht():
     </div>
     """, unsafe_allow_html=True)
 
-    # ── Abmelden / Anmelden ──
-    st.markdown("<div style='margin-top:24px'></div>", unsafe_allow_html=True)
+    # ── Abmelden (nur wenn eingeloggt) ──
     if st.session_state.user:
+        st.markdown("<div style='margin-top:24px'></div>", unsafe_allow_html=True)
         def do_logout():
             supabase.auth.sign_out()
             for k in list(st.session_state.keys()):
                 del st.session_state[k]
             st.rerun()
         st.button("🚪 Abmelden", on_click=do_logout)
-    else:
-        st.caption("Noch kein Konto?")
-        st.button("Anmelden / Registrieren", type="secondary", on_click=lambda: navigate("auth"))
 
     bottom_nav()
 
@@ -737,7 +744,8 @@ def page_upgrade():
     st.markdown('<p style="color:#9b928b;font-size:14px">Alle Funktionen, keine Limits.</p>', unsafe_allow_html=True)
     st.markdown("---")
 
-    haken = svg_img(ICON_HAKEN, "18px")
+    # FIX Haken: display:inline-block statt display:block → text-align:center zentriert korrekt
+    haken = f'<img src="data:image/svg+xml;base64,{ICON_HAKEN}" width="18px" style="display:inline-block;vertical-align:middle"/>'
     st.markdown(f"""
     <table class="upgrade-table">
         <thead>
@@ -756,7 +764,8 @@ def page_upgrade():
     """, unsafe_allow_html=True)
 
     st.markdown("---")
-    st.button("Upgrade für 2,99 €/Monat →", type="primary", on_click=lambda: navigate("auth"))
+    # FIX: Pfeil → entfernt, use_container_width für volle Breite
+    st.button("Upgrade für 2,99 €/Monat", type="primary", use_container_width=True, on_click=lambda: navigate("auth"))
     st.caption("⚙️ Zahlungsabwicklung via Stripe folgt in Phase 2.")
     bottom_nav()
 
