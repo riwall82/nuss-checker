@@ -29,13 +29,18 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600;700&display=swap');
 
-/* ── Hide Streamlit chrome ── */
+/* ── Hide Streamlit chrome (inkl. bottom-right Badge) ── */
 #MainMenu, header[data-testid="stHeader"], [data-testid="stToolbar"],
 footer, .viewerBadge_container__1QSob, [data-testid="stDecoration"],
-.stDeployButton, [data-testid="manage-app-button"] {
+.stDeployButton, [data-testid="manage-app-button"],
+[data-testid="stStatusWidget"],
+[data-testid="stAppViewBlockContainer"] ~ div,
+.st-emotion-cache-1dp5vir, .st-emotion-cache-eczf2e,
+[class*="StatusWidget"], [class*="toolbarActions"] {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
+    pointer-events: none !important;
 }
 
 /* ── Basis ── */
@@ -44,7 +49,22 @@ html, body, [class*="css"] {
     background: #fff;
     -webkit-text-size-adjust: 100%;
 }
-.stApp { background: #fff; }
+/* FIX Nav-Bar: overflow:visible auf Root-Elementen damit position:fixed
+   relativ zum Viewport funktioniert (iOS Safari-Bug mit overflow:hidden) */
+.stApp {
+    background: #fff !important;
+    overflow: visible !important;
+    transform: none !important;
+}
+[data-testid="stAppViewContainer"] {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    transform: none !important;
+}
+[data-testid="stMain"], [data-testid="stVerticalBlock"] {
+    transform: none !important;
+    filter: none !important;
+}
 .block-container {
     padding: 16px 16px 100px 16px !important;
     max-width: 430px !important;
@@ -76,8 +96,15 @@ label { font-family: 'Albert Sans', sans-serif !important; color: #000 !importan
 }
 .stButton > button[kind="primary"] {
     background: #b78715 !important; color: #fff !important;
-    border: none !important; font-weight: 600 !important;
+    border: none !important; font-weight: 700 !important;
     font-size: 16px !important; padding: 14px 24px !important; width: 100% !important;
+}
+/* FIX: Neuere Streamlit-Versionen rendern Button-Text in einem inneren <p> –
+   dieser braucht eigene Farb- und Gewicht-Regeln */
+.stButton > button[kind="primary"] p,
+.stButton > button[kind="primary"] div {
+    color: #fff !important;
+    font-weight: 700 !important;
 }
 .stButton > button[kind="primary"]:hover { opacity: 0.88 !important; }
 .stButton > button[kind="primary"]:disabled {
@@ -144,24 +171,25 @@ label { font-family: 'Albert Sans', sans-serif !important; color: #000 !importan
 .stCaption { color: #9b928b !important; font-size: 13px !important; }
 hr { border: none !important; border-top: 1px solid #f0f0f0 !important; margin: 10px 0 !important; }
 
-/* ── Kamera: lässt 72px unten für Nav frei ── */
-[data-testid="stCameraInput"] {
-    position: fixed !important; top: 0 !important; left: 0 !important;
-    width: 100vw !important; height: calc(100vh - 72px) !important;
-    z-index: 8000 !important; background: #000 !important;
-    display: flex !important; flex-direction: column !important;
+/* ── File-Uploader (Scan-Seite) ── */
+[data-testid="stFileUploaderDropzone"] {
+    display: none !important;
 }
-[data-testid="stCameraInput"] video {
-    width: 100% !important; height: calc(100vh - 72px - 80px) !important;
-    object-fit: cover !important;
+[data-testid="stFileUploaderDropzoneInstructions"] {
+    display: none !important;
 }
-[data-testid="stCameraInput"] button {
-    position: absolute !important; bottom: 16px !important;
-    left: 50% !important; transform: translateX(-50%) !important;
+section[data-testid="stFileUploader"] label {
+    display: none !important;
+}
+section[data-testid="stFileUploader"] > div > button,
+section[data-testid="stFileUploader"] button[kind="secondary"] {
     background: #b78715 !important; color: #fff !important;
-    border: none !important; border-radius: 50px !important;
-    padding: 14px 40px !important; font-size: 16px !important;
-    font-weight: 600 !important; z-index: 8001 !important;
+    border: none !important; border-radius: 12px !important;
+    font-weight: 700 !important; font-size: 16px !important;
+    width: 100% !important; padding: 14px 24px !important;
+}
+section[data-testid="stFileUploader"] button[kind="secondary"] p {
+    color: #fff !important; font-weight: 700 !important;
 }
 
 /* ── Bottom Nav (reines HTML-Element) ── */
@@ -523,7 +551,7 @@ def page_auth():
             except Exception as e:
                 st.error(f"Login fehlgeschlagen: {e}")
 
-        st.button("Einloggen", on_click=do_login, type="primary")
+        st.button("Einloggen", on_click=do_login, type="primary", use_container_width=True)
 
     bottom_nav()
 
@@ -556,7 +584,19 @@ def page_scan():
         "📋 Restaurant QR-Code"
     ], label_visibility="collapsed", horizontal=True)
 
-    camera_image = st.camera_input("", label_visibility="collapsed")
+    st.markdown("""
+    <div style="background:#f9f9f9;border:1.5px dashed #e0e0e0;border-radius:14px;
+    padding:24px 16px;text-align:center;margin:12px 0;">
+        <p style="font-size:28px;margin:0">📷</p>
+        <p style="font-size:15px;color:#9b928b;margin:6px 0 0">
+            Foto aufnehmen oder aus Galerie wählen
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    camera_image = st.file_uploader(
+        "", type=["jpg", "jpeg", "png", "webp"],
+        label_visibility="collapsed", key="scan_upload"
+    )
 
     if camera_image:
         st.markdown("---")
