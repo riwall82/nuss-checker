@@ -139,13 +139,12 @@ label { font-family: 'Albert Sans', sans-serif !important; color: #000 !importan
 .stTabs [data-baseweb="tab-highlight"] { display: none !important; }
 .stTabs [data-baseweb="tab-border"] { display: none !important; }
 
-/* ── Alerts ── */
+/* ── Alerts / Captions / HR ── */
 .stAlert { border-radius: 12px !important; font-family: 'Albert Sans', sans-serif !important; }
 .stCaption { color: #9b928b !important; font-size: 13px !important; }
 hr { border: none !important; border-top: 1px solid #f0f0f0 !important; margin: 10px 0 !important; }
 
-/* ── Kamera: fast-fullscreen, lässt 72px für die Nav-Bar frei ──
-   FIX: vorher 100vh → Nav wurde vollständig überdeckt */
+/* ── Kamera: lässt 72px unten für Nav frei ── */
 [data-testid="stCameraInput"] {
     position: fixed !important; top: 0 !important; left: 0 !important;
     width: 100vw !important; height: calc(100vh - 72px) !important;
@@ -165,61 +164,44 @@ hr { border: none !important; border-top: 1px solid #f0f0f0 !important; margin: 
     font-weight: 600 !important; z-index: 8001 !important;
 }
 
-/* ── Bottom Navigation ──
-   FIX: Statt .nav-wrapper (das Streamlit-Buttons nie wirklich enthielt)
-   wird jetzt der letzte stHorizontalBlock direkt fixed ans Bottom gesetzt.
-   Streamlit rendert st.columns() als stHorizontalBlock — bottom_nav() ist
-   immer das letzte Columns-Element auf der Seite. */
-[data-testid="stHorizontalBlock"]:last-of-type {
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: 100% !important;
-    max-width: 430px !important;
-    background: #fff !important;
-    border-top: 1px solid #f0f0f0 !important;
-    z-index: 9000 !important;
-    box-shadow: 0 -2px 12px rgba(0,0,0,0.07) !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    gap: 0 !important;
+/* ── Bottom Nav (reines HTML-Element) ── */
+.nc-bottom-nav {
+    position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 100%; max-width: 430px; height: 72px;
+    background: #fff; border-top: 1px solid #f0f0f0;
+    z-index: 9999; box-shadow: 0 -2px 12px rgba(0,0,0,0.07);
+    display: flex; align-items: center;
 }
-[data-testid="stHorizontalBlock"]:last-of-type .stButton > button {
-    background-color: transparent !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    background-size: auto 68px !important;
-    border: none !important; border-radius: 0 !important;
-    width: 100% !important; height: 72px !important;
-    color: transparent !important; font-size: 1px !important;
-    box-shadow: none !important; padding: 0 !important;
+.nc-bottom-nav a {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    height: 100%; text-decoration: none; -webkit-tap-highlight-color: transparent;
 }
+.nc-bottom-nav a img { height: 68px; width: auto; display: block; }
 
-/* Profil List Rows */
-.profil-row {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 4px; border-bottom: 1px solid #f0f0f0; cursor: pointer;
-}
-.profil-row-label { font-size: 16px; color: #000; font-weight: 400; font-family: 'Albert Sans', sans-serif; }
-.profil-row-right { display: flex; align-items: center; gap: 8px; }
-.profil-row-value { font-size: 14px; color: #9b928b; font-family: 'Albert Sans', sans-serif; }
-.profil-row-arrow { font-size: 16px; color: #9b928b; }
+/* ── Profil Listenzeilen (reines HTML) ── */
 .profil-section-title {
     font-size: 13px; font-weight: 600; color: #9b928b;
     text-transform: uppercase; letter-spacing: 0.5px;
     font-family: 'Albert Sans', sans-serif;
     margin: 20px 0 0; padding-bottom: 2px;
 }
-.profil-row-btn .stButton > button {
-    position: absolute !important; top: 0 !important; left: 0 !important;
-    width: 100% !important; height: 100% !important;
-    opacity: 0 !important; cursor: pointer !important;
-    border-radius: 0 !important;
+a.profil-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 4px; border-bottom: 1px solid #f0f0f0;
+    text-decoration: none; color: inherit; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
-.profil-row-container { position: relative; }
+a.profil-row:active { background: #f9f9f9; }
+div.profil-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 4px; border-bottom: 1px solid #f0f0f0; color: #9b928b;
+}
+.profil-row-label { font-size: 16px; color: #000; font-weight: 400; font-family: 'Albert Sans', sans-serif; }
+.profil-row-right { display: flex; align-items: center; gap: 8px; }
+.profil-row-value { font-size: 14px; color: #9b928b; font-family: 'Albert Sans', sans-serif; }
+.profil-row-arrow { font-size: 18px; color: #9b928b; font-weight: 300; }
 
-/* Upgrade Tabelle: nur horizontale Linien */
+/* ── Upgrade Tabelle ── */
 .upgrade-table {
     width: 100%; border-collapse: collapse;
     font-family: 'Albert Sans', sans-serif; font-size: 15px; margin: 8px 0;
@@ -238,7 +220,7 @@ hr { border: none !important; border-top: 1px solid #f0f0f0 !important; margin: 
 .upgrade-table td.center { text-align: center; color: #9b928b; }
 .upgrade-table td.ja { text-align: center; color: #b78715; }
 
-/* Gericht Card */
+/* ── Gericht Card ── */
 .gericht-card {
     background: #f9f9f9; border-radius: 14px; padding: 14px 16px;
     margin-bottom: 10px; border: 1px solid #f0f0f0;
@@ -249,14 +231,14 @@ hr { border: none !important; border-top: 1px solid #f0f0f0 !important; margin: 
 .ampel-sicher { color: #2e7d32; font-size: 13px; font-weight: 500; }
 .ampel-warnung { color: #c0392b; font-size: 13px; font-weight: 500; }
 
-/* Disclaimer Box */
+/* ── Disclaimer Box ── */
 .disclaimer-box {
     background: #f9f9f9; border-radius: 14px; padding: 20px; margin: 16px 0;
     font-family: 'Albert Sans', sans-serif; font-size: 14px;
     line-height: 1.7; color: #000;
 }
 
-/* Scan Limit */
+/* ── Scan Limit ── */
 .scan-limit-box {
     background: #fffbf0; border: 1.5px solid #b78715; border-radius: 16px;
     padding: 24px; text-align: center; margin: 24px 0;
@@ -279,19 +261,12 @@ supabase = init_supabase()
 # ─────────────────────────────────────────────
 ALLERGEN_LABELS = {
     "A": "Glutenhaltiges Getreide (Weizen, Roggen, Gerste, Hafer, Dinkel ...)",
-    "B": "Krebstiere",
-    "C": "Eier",
-    "D": "Fische",
-    "E": "Erdnüsse",
-    "F": "Soja",
-    "G": "Milch (Kuh, Schaf, Ziege, Pferd, Esel und Erzeugnisse)",
+    "B": "Krebstiere", "C": "Eier", "D": "Fische", "E": "Erdnüsse",
+    "F": "Soja", "G": "Milch (Kuh, Schaf, Ziege, Pferd, Esel und Erzeugnisse)",
     "H": "Schalenfrüchte (Mandeln, Haselnüsse, Walnüsse, Cashews ...)",
-    "L": "Sellerie",
-    "M": "Senf",
-    "N": "Sesam",
+    "L": "Sellerie", "M": "Senf", "N": "Sesam",
     "O": "Schwefeldioxid und Sulfite (> 10 mg/kg oder 10 mg/l)",
-    "P": "Lupinen",
-    "R": "Weichtiere"
+    "P": "Lupinen", "R": "Weichtiere"
 }
 ALLERGEN_SHORT = {
     "A": "Gluten", "B": "Krebstiere", "C": "Eier", "D": "Fische",
@@ -301,13 +276,20 @@ ALLERGEN_SHORT = {
 }
 FREEMIUM_SCAN_LIMIT = 3
 
+# Welche Seite setzt welchen aktiven Tab
+PAGE_TO_TAB = {
+    "scan": "scan",
+    "restaurants": "restaurants", "speisekarte": "restaurants",
+    "profil_uebersicht": "profil", "allergen_settings": "profil",
+    "upgrade": "profil", "auth": "profil", "alternatives": "scan",
+}
+
 # ─────────────────────────────────────────────
 # SESSION STATE
 # ─────────────────────────────────────────────
 for k, v in {
     "page": "disclaimer",
-    "user": None,
-    "profile": None,
+    "user": None, "profile": None,
     "user_allergene": [],
     "disclaimer_accepted": False,
     "onboarding_complete": False,
@@ -315,13 +297,27 @@ for k, v in {
     "restaurant_data": None,
     "active_tab": "scan",
     "local_scan_count": 0,
-    "camera_active": False,
 }.items():
     if k not in st.session_state:
         st.session_state[k] = v
 
+# ─────────────────────────────────────────────
+# QUERY-PARAM NAVIGATION
+# Ermöglicht Navigation via reiner HTML <a href="?page=...">-Links.
+# Streamlit erkennt Query-Param-Änderungen und löst einen Rerun aus.
+# ─────────────────────────────────────────────
+_qp_page = st.query_params.get("page", "")
+if _qp_page:
+    st.query_params.clear()
+    st.session_state.page = _qp_page
+    if _qp_page in PAGE_TO_TAB:
+        st.session_state.active_tab = PAGE_TO_TAB[_qp_page]
+    st.rerun()
+
 def navigate(page):
     st.session_state.page = page
+    if page in PAGE_TO_TAB:
+        st.session_state.active_tab = PAGE_TO_TAB[page]
     st.rerun()
 
 # ─────────────────────────────────────────────
@@ -332,7 +328,6 @@ def load_profile(user_id):
     if res.data:
         p = res.data
         st.session_state.profile = p
-        # Lokales disclaimer_accepted NICHT mit False aus DB überschreiben
         if not st.session_state.disclaimer_accepted:
             st.session_state.disclaimer_accepted = p.get("disclaimer_accepted", False)
         st.session_state.user_allergene = [k for k in ALLERGEN_LABELS if p.get(k, False)]
@@ -376,10 +371,8 @@ def check_ampel(gericht, allergene):
     return True, ""
 
 # ─────────────────────────────────────────────
-# BOTTOM NAVIGATION
-# FIX: Icon-Injektion jetzt via :last-of-type-Selektor,
-# der direkt den stHorizontalBlock der Nav trifft.
-# Kein nav-wrapper-div mehr nötig.
+# BOTTOM NAVIGATION — reines HTML, kein Streamlit-Button-Trick
+# Icons direkt als <img> eingebettet, Links via ?page= Query-Param
 # ─────────────────────────────────────────────
 def bottom_nav():
     tab = st.session_state.active_tab
@@ -388,32 +381,18 @@ def bottom_nav():
     r_icon = ICON_REST_AKTIV   if tab == "restaurants" else ICON_REST_PASSIV
 
     st.markdown(f"""
-    <style>
-    [data-testid="stHorizontalBlock"]:last-of-type [data-testid="column"]:nth-child(1) .stButton > button {{
-        background-image: url('data:image/svg+xml;base64,{p_icon}') !important;
-    }}
-    [data-testid="stHorizontalBlock"]:last-of-type [data-testid="column"]:nth-child(2) .stButton > button {{
-        background-image: url('data:image/svg+xml;base64,{s_icon}') !important;
-    }}
-    [data-testid="stHorizontalBlock"]:last-of-type [data-testid="column"]:nth-child(3) .stButton > button {{
-        background-image: url('data:image/svg+xml;base64,{r_icon}') !important;
-    }}
-    </style>
+    <div class="nc-bottom-nav">
+        <a href="?page=profil_uebersicht">
+            <img src="data:image/svg+xml;base64,{p_icon}" />
+        </a>
+        <a href="?page=scan">
+            <img src="data:image/svg+xml;base64,{s_icon}" />
+        </a>
+        <a href="?page=restaurants">
+            <img src="data:image/svg+xml;base64,{r_icon}" />
+        </a>
+    </div>
     """, unsafe_allow_html=True)
-
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        if st.button("p", key="nb_p", use_container_width=True):
-            st.session_state.active_tab = "profil"
-            navigate("profil_uebersicht")
-    with c2:
-        if st.button("s", key="nb_s", use_container_width=True):
-            st.session_state.active_tab = "scan"
-            navigate("scan")
-    with c3:
-        if st.button("r", key="nb_r", use_container_width=True):
-            st.session_state.active_tab = "restaurants"
-            navigate("restaurants")
 
 # ─────────────────────────────────────────────
 # SEITE 1: DISCLAIMER
@@ -550,7 +529,6 @@ def page_auth():
 # SEITE 4: SCAN
 # ─────────────────────────────────────────────
 def page_scan():
-    st.session_state.active_tab = "scan"
     scan_count = get_scan_count()
 
     if not is_premium() and scan_count >= FREEMIUM_SCAN_LIMIT:
@@ -604,8 +582,6 @@ def page_scan():
 # SEITE 5: RESTAURANTS
 # ─────────────────────────────────────────────
 def page_restaurants():
-    st.session_state.active_tab = "restaurants"
-
     tab_karte, tab_liste, tab_lesezeichen = st.tabs(["Karte", "Liste", "Lesezeichen"])
 
     with tab_karte:
@@ -694,86 +670,52 @@ def page_alternatives():
     import pandas as pd
     df = pd.DataFrame({
         "Produkt": ["Rote Linsen", "Kichererbsen", "Quinoa"],
-        "Marke": ["Ja! Natürlich", "Spar Bio", "dm Bio"],
-        "Status": ["✅ Sicher", "✅ Sicher", "✅ Sicher"]
+        "Marke":   ["Ja! Natürlich", "Spar Bio", "dm Bio"],
+        "Status":  ["✅ Sicher", "✅ Sicher", "✅ Sicher"]
     })
     st.dataframe(df, use_container_width=True)
     bottom_nav()
 
 # ─────────────────────────────────────────────
-# SEITE 8: PROFIL
+# SEITE 8: PROFIL — reine HTML-Links, keine Button-Overlays
 # ─────────────────────────────────────────────
 def page_profil_uebersicht():
-    st.session_state.active_tab = "profil"
     st.markdown("# Profil")
-
     plan = "Plus" if is_premium() else "Gratistarif"
 
+    # ── Sektion: Konto ──
     st.markdown('<div class="profil-section-title">Konto</div>', unsafe_allow_html=True)
-
     st.markdown(f"""
-    <div class="profil-row" id="row-abo">
+    <a href="?page=upgrade" class="profil-row">
         <span class="profil-row-label">Abonnement</span>
         <span class="profil-row-right">
             <span class="profil-row-value">{plan}</span>
             <span class="profil-row-arrow">›</span>
         </span>
-    </div>
-    """, unsafe_allow_html=True)
-    if st.button("Abonnement", key="btn_abo", use_container_width=True):
-        navigate("upgrade")
-    st.markdown("""
-    <style>
-    button[data-key="btn_abo"] {
-        position: relative !important; margin-top: -52px !important;
-        height: 52px !important; opacity: 0 !important; z-index: 10 !important;
-        border-radius: 0 !important; background: transparent !important;
-    }
-    </style>
+    </a>
     """, unsafe_allow_html=True)
 
+    # ── Sektion: App ──
     st.markdown('<div class="profil-section-title">App</div>', unsafe_allow_html=True)
-
     st.markdown("""
-    <div class="profil-row">
+    <a href="?page=allergen_settings" class="profil-row">
         <span class="profil-row-label">Meine Allergene</span>
         <span class="profil-row-arrow">›</span>
-    </div>
+    </a>
     """, unsafe_allow_html=True)
-    if st.button("Meine Allergene", key="btn_alg", use_container_width=True):
-        navigate("allergen_settings")
-    st.markdown("""
-    <style>
-    button[data-key="btn_alg"] {
-        position: relative !important; margin-top: -52px !important;
-        height: 52px !important; opacity: 0 !important; z-index: 10 !important;
-        border-radius: 0 !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
+    # Sprache: noch nicht navigierbar → nicht-klickbare Zeile
     st.markdown("""
     <div class="profil-row">
-        <span class="profil-row-label">Sprache</span>
+        <span class="profil-row-label" style="color:#9b928b">Sprache</span>
         <span class="profil-row-right">
             <span class="profil-row-value">Deutsch</span>
             <span class="profil-row-arrow">›</span>
         </span>
     </div>
     """, unsafe_allow_html=True)
-    if st.button("Sprache", key="btn_lang", use_container_width=True):
-        st.toast("Mehrsprachigkeit folgt in Phase 2 ⚙️")
-    st.markdown("""
-    <style>
-    button[data-key="btn_lang"] {
-        position: relative !important; margin-top: -52px !important;
-        height: 52px !important; opacity: 0 !important; z-index: 10 !important;
-        border-radius: 0 !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
 
-    st.markdown("---")
+    # ── Abmelden / Anmelden ──
+    st.markdown("<div style='margin-top:24px'></div>", unsafe_allow_html=True)
     if st.session_state.user:
         def do_logout():
             supabase.auth.sign_out()
@@ -806,21 +748,9 @@ def page_upgrade():
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Tägliche Scans</td>
-                <td class="center">3</td>
-                <td class="ja">∞</td>
-            </tr>
-            <tr>
-                <td>Sichere Alternativen</td>
-                <td class="center">–</td>
-                <td class="ja">{haken}</td>
-            </tr>
-            <tr>
-                <td>Lesezeichen</td>
-                <td class="center">–</td>
-                <td class="ja">{haken}</td>
-            </tr>
+            <tr><td>Tägliche Scans</td><td class="center">3</td><td class="ja">∞</td></tr>
+            <tr><td>Sichere Alternativen</td><td class="center">–</td><td class="ja">{haken}</td></tr>
+            <tr><td>Lesezeichen</td><td class="center">–</td><td class="ja">{haken}</td></tr>
         </tbody>
     </table>
     """, unsafe_allow_html=True)
@@ -896,8 +826,6 @@ def page_restaurant_admin():
 # ─────────────────────────────────────────────
 # ROUTER
 # ─────────────────────────────────────────────
-page = st.session_state.page
-
 routes = {
     "disclaimer":        page_disclaimer,
     "allergen_settings": page_allergen_settings,
@@ -911,4 +839,4 @@ routes = {
     "restaurant_admin":  page_restaurant_admin,
 }
 
-routes.get(page, page_scan)()
+routes.get(st.session_state.page, page_scan)()
