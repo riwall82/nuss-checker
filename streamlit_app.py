@@ -512,7 +512,7 @@ def bottom_nav():
 # SEITE 0a: SPLASH (beim Laden, immer einmalig)
 # ─────────────────────────────────────────────
 def page_splash():
-    # Vollbild-Splash mit Auto-Weiterleitung nach 2,5 s
+    import time
     st.markdown(f"""
     <style>
     .nc-splash {{
@@ -529,15 +529,9 @@ def page_splash():
         <img src="data:image/jpeg;base64,{TEASER_MASTER}" />
     </div>
     """, unsafe_allow_html=True)
-    # JS: nach 2,5 s automatisch zur Onboarding-Seite
-    components.html("""
-    <script>
-    setTimeout(function() {
-        var url = window.parent.location.href.split('?')[0];
-        window.parent.location.href = url + '?page=onboarding';
-    }, 2500);
-    </script>
-    """, height=0)
+    # Server-seitiger Timer — zuverlässiger als JS auf iOS
+    time.sleep(2.5)
+    navigate("onboarding")
 
 # ─────────────────────────────────────────────
 # SEITE 0b: ONBOARDING CAROUSEL (3 Slides)
