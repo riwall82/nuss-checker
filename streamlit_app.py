@@ -418,6 +418,9 @@ _qp_page  = st.query_params.get("page", "")
 _qp_slide = st.query_params.get("slide", "")
 if _qp_page or _qp_slide:
     st.query_params.clear()
+    # FIX: Link-Klick löst Browser-Navigation aus → Session-State wird resettet.
+    # splash_shown hier sofort setzen, damit der Splash nicht erneut erscheint.
+    st.session_state.splash_shown = True
     if _qp_page:
         st.session_state.page = _qp_page
         if _qp_page in PAGE_TO_TAB:
@@ -535,117 +538,64 @@ def page_splash():
 
 # ─────────────────────────────────────────────
 # SEITE 0b: ONBOARDING CAROUSEL (3 Slides)
+# Bilder sind vollständig gestaltet (Text + Dots bereits integriert).
+# Kein Overlay. Ganzer Screen = Link zum nächsten Slide (Tippen).
+# Swipe links/rechts per JS als zweite Eingabemethode.
 # ─────────────────────────────────────────────
-ONBOARDING_SLIDES = [
-    (TEASER_1, "Sicher einkaufen",
-     "Scanne das Etikett und sieh sofort, was für dich geeignet ist."),
-    (TEASER_2, "Entspannt essen gehen",
-     "Filtere die Speisekarte nach deinen Allergenen – bevor du bestellst."),
-    (TEASER_3, "Sorgenfrei unterwegs",
-     "Fremdsprachige Etiketten? Wir erkennen deine Allergene in jeder Sprache."),
-]
+ONBOARDING_SLIDES = [TEASER_1, TEASER_2, TEASER_3]
 
 def page_onboarding():
-    slide = st.session_state.onboarding_slide
-    img_b64, title, text = ONBOARDING_SLIDES[slide]
+    slide   = st.session_state.onboarding_slide
+    img_b64 = ONBOARDING_SLIDES[slide]
     is_last = (slide == len(ONBOARDING_SLIDES) - 1)
 
+    next_url = "?page=disclaimer" if is_last else f"?page=onboarding&slide={slide+1}"
+    prev_url = f"?page=onboarding&slide={slide-1}" if slide > 0 else ""
+
+    # Vollbild-Bild als tippbarer Link → nächster Slide
     st.markdown(f"""
     <style>
-    /* Onboarding: kein Block-Container-Padding */
     .block-container {{ padding: 0 !important; }}
-    .nc-ob-wrap {{
+    .nc-ob-link {{
         position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 9000; background: #fff; display: flex; flex-direction: column;
+        z-index: 9000; display: block;
+        -webkit-tap-highlight-color: transparent;
     }}
-    .nc-ob-img {{
-        flex: 1; overflow: hidden;
-    }}
-    .nc-ob-img img {{
+    .nc-ob-link img {{
         width: 100%; height: 100%;
         object-fit: cover; object-position: center;
-    }}
-    .nc-ob-footer {{
-        padding: 20px 24px 36px;
-        background: #fff; text-align: center;
-    }}
-    .nc-ob-title {{
-        font-family: 'Albert Sans', sans-serif;
-        font-size: 22px; font-weight: 700; color: #000;
-        margin: 0 0 8px;
-    }}
-    .nc-ob-text {{
-        font-family: 'Albert Sans', sans-serif;
-        font-size: 15px; color: #9b928b;
-        margin: 0 0 20px; line-height: 1.5;
-    }}
-    .nc-ob-dots {{
-        display: flex; justify-content: center; gap: 8px; margin-bottom: 20px;
-    }}
-    .nc-ob-dot {{
-        width: 8px; height: 8px; border-radius: 50%;
-        background: #e0e0e0; transition: background 0.2s;
-    }}
-    .nc-ob-dot.active {{ background: #b78715; width: 24px; border-radius: 4px; }}
-    .nc-ob-btn {{
-        display: block; width: 100%;
-        background: #b78715; color: #fff;
-        font-family: 'Albert Sans', sans-serif;
-        font-size: 16px; font-weight: 700;
-        border: none; border-radius: 12px;
-        padding: 16px 24px; cursor: pointer;
-        text-decoration: none; text-align: center;
-    }}
-    .nc-ob-skip {{
-        display: block; margin-top: 12px;
-        font-family: 'Albert Sans', sans-serif;
-        font-size: 14px; color: #9b928b;
-        text-decoration: none; text-align: center;
+        display: block;
     }}
     </style>
-    <div class="nc-ob-wrap">
-        <div class="nc-ob-img">
-            <img src="data:image/jpeg;base64,{img_b64}" />
-        </div>
-        <div class="nc-ob-footer">
-            <p class="nc-ob-title">{title}</p>
-            <p class="nc-ob-text">{text}</p>
-            <div class="nc-ob-dots">
-                <div class="nc-ob-dot {"active" if slide==0 else ""}"></div>
-                <div class="nc-ob-dot {"active" if slide==1 else ""}"></div>
-                <div class="nc-ob-dot {"active" if slide==2 else ""}"></div>
-            </div>
-            {"<a href='?page=disclaimer' class='nc-ob-btn' target='_self'>Los geht's</a>" if is_last else
-             f"<a href='?page=onboarding&slide={slide+1}' class='nc-ob-btn' target='_self'>Weiter</a>"}
-            {"<a href='?page=disclaimer' class='nc-ob-skip' target='_self'>Überspringen</a>" if not is_last else ""}
-        </div>
-    </div>
+    <a href="{next_url}" target="_self" class="nc-ob-link">
+        <img src="data:image/jpeg;base64,{img_b64}" />
+    </a>
     """, unsafe_allow_html=True)
 
-    # Swipe-Gesten per JS
-    prev_url = f"?page=onboarding&slide={max(slide-1,0)}" if slide > 0 else ""
-    next_url = f"?page=onboarding&slide={slide+1}" if not is_last else "?page=disclaimer"
+    # Swipe-Gesten per JS (links = vor, rechts = zurück)
     components.html(f"""
     <script>
     (function() {{
-        var startX = 0, startY = 0;
+        var startX = 0, startY = 0, swiped = false;
         var doc = window.parent.document;
+        var base = window.parent.location.href.split('?')[0];
         doc.addEventListener('touchstart', function(e) {{
             startX = e.touches[0].clientX;
             startY = e.touches[0].clientY;
+            swiped = false;
         }}, {{passive: true}});
         doc.addEventListener('touchend', function(e) {{
             var dx = startX - e.changedTouches[0].clientX;
             var dy = Math.abs(startY - e.changedTouches[0].clientY);
-            if (Math.abs(dx) > 50 && Math.abs(dx) > dy) {{
-                var base = window.parent.location.href.split('?')[0];
-                if (dx > 0 && '{next_url}') {{
+            if (Math.abs(dx) > 40 && Math.abs(dx) > dy) {{
+                swiped = true;
+                if (dx > 0) {{
                     window.parent.location.href = base + '{next_url}';
                 }} else if (dx < 0 && '{prev_url}') {{
                     window.parent.location.href = base + '{prev_url}';
                 }}
             }}
-        }}, {{passive: true}});
+        }});
     }})();
     </script>
     """, height=0)
