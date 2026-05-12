@@ -439,7 +439,9 @@ def navigate(page):
 # HILFSFUNKTIONEN
 # ─────────────────────────────────────────────
 def load_profile(user_id):
-    res = supabase.table("user_profiles").select("*").eq("id", user_id).single().execute()
+    # maybe_single() statt single() → gibt None zurück wenn noch kein Profil existiert
+    # (passiert wenn der Trigger handle_new_user() noch nicht gefeuert hat)
+    res = supabase.table("user_profiles").select("*").eq("id", user_id).maybe_single().execute()
     if res.data:
         p = res.data
         st.session_state.profile = p
@@ -999,7 +1001,7 @@ def page_restaurant_admin():
         def do_rest_login():
             try:
                 res = supabase.auth.sign_in_with_password({"email": email_r, "password": pw_r})
-                rr = supabase.table("restaurants").select("*").eq("owner_id", res.user.id).single().execute()
+                rr = supabase.table("restaurants").select("*").eq("owner_id", res.user.id).maybe_single().execute()
                 if rr.data:
                     st.session_state.restaurant_logged_in = True
                     st.session_state.restaurant_data = rr.data
